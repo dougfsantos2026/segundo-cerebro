@@ -51,7 +51,7 @@ export default function Servicos() {
 
                 <a
                   href="#contato"
-                  className="mt-6 inline-flex items-center gap-1.5 self-start pt-1 text-sm font-semibold text-marca-600 transition-colors hover:text-marca-700"
+                  className="mt-auto inline-flex items-center gap-1.5 self-start pt-6 text-sm font-semibold text-marca-600 transition-colors hover:text-marca-700"
                 >
                   Saber mais
                   <ArrowRight

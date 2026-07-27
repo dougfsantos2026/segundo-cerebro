@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <Logo />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-grafite-400">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-grafite-300">
               Criamos sites profissionais para pequenos e médios negócios —
               rápidos, fáceis de usar no celular e preparados para transformar
               visitas em contatos.
@@ -137,7 +137,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs text-grafite-500">
+          <p className="text-xs text-grafite-350">
             © {anoAtual} {siteConfig.nome}. Todos os direitos reservados.
           </p>
           <BackToTop />

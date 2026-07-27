@@ -138,7 +138,7 @@ export default function Contato() {
                   <span className="block text-sm font-semibold text-white">
                     WhatsApp
                   </span>
-                  <span className="text-sm text-grafite-400">
+                  <span className="text-sm text-grafite-300">
                     {contato.telefoneExibicao}
                   </span>
                 </span>
@@ -156,7 +156,7 @@ export default function Contato() {
                   <span className="block text-sm font-semibold text-white">
                     E-mail
                   </span>
-                  <span className="block truncate text-sm text-grafite-400">
+                  <span className="block truncate text-sm text-grafite-300">
                     {contato.email}
                   </span>
                 </span>
@@ -170,7 +170,7 @@ export default function Contato() {
                 <span className="block text-sm font-semibold text-white">
                   Atendimento
                 </span>
-                <span className="text-sm text-grafite-400">
+                <span className="text-sm text-grafite-300">
                   {contato.horario}
                 </span>
               </span>
@@ -185,7 +185,7 @@ export default function Contato() {
                 <CheckCheck className="size-7" aria-hidden="true" />
               </span>
               <h3 className="mt-6 text-2xl text-white">Pedido enviado!</h3>
-              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-grafite-400">
+              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-grafite-300">
                 Recebemos suas informações e vamos responder no e-mail ou
                 WhatsApp que você informou, normalmente no mesmo dia útil.
               </p>
@@ -386,7 +386,7 @@ export default function Contato() {
                 )}
               </Button>
 
-              <p className="mt-4 text-center text-xs text-grafite-500">
+              <p className="mt-4 text-center text-xs text-grafite-350">
                 Seus dados são usados apenas para responder este contato.
               </p>
             </form>

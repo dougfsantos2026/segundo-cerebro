@@ -119,9 +119,13 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button href="#contato" className="hidden sm:inline-flex">
-            Solicitar orçamento
-          </Button>
+          {/*
+            A visibilidade fica no contêiner: aplicar `hidden` direto no botão
+            competiria com o `inline-flex` do próprio componente.
+          */}
+          <div className="hidden sm:block">
+            <Button href="#contato">Solicitar orçamento</Button>
+          </div>
 
           <button
             ref={botaoMenuRef}

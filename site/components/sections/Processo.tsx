@@ -36,7 +36,7 @@ export default function Processo() {
                 >
                   <Icone className="size-4.5" strokeWidth={1.75} />
                 </span>
-                <span className="font-display text-sm font-bold tracking-[0.14em] text-grafite-300">
+                <span className="font-display text-sm font-bold tracking-[0.14em] text-grafite-400">
                   {etapa.numero}
                 </span>
               </div>

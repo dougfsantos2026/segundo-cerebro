@@ -19,7 +19,7 @@ export default function Comparativo() {
             <h3 className="flex items-center gap-3 text-xl text-grafite-300">
               <span
                 aria-hidden="true"
-                className="inline-flex size-8 items-center justify-center rounded-full bg-grafite-700 text-grafite-400"
+                className="inline-flex size-8 items-center justify-center rounded-full bg-grafite-700 text-grafite-300"
               >
                 <X className="size-4" strokeWidth={2.5} />
               </span>
@@ -30,11 +30,11 @@ export default function Comparativo() {
               {comparativo.map((linha) => (
                 <li key={linha.criterio} className="flex gap-3 text-sm">
                   <X
-                    className="mt-0.5 size-4 shrink-0 text-grafite-600"
+                    className="mt-0.5 size-4 shrink-0 text-grafite-400"
                     aria-hidden="true"
                     strokeWidth={2.5}
                   />
-                  <span className="text-grafite-400">
+                  <span className="text-grafite-300">
                     <span className="sr-only">{linha.criterio}: </span>
                     {linha.improvisado}
                   </span>

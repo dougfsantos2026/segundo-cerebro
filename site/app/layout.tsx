@@ -102,6 +102,13 @@ export default function RootLayout({
       lang={siteConfig.idioma}
       className={`${sora.variable} ${inter.variable}`}
     >
+      <head>
+        {/* Sem JavaScript as animações de entrada nunca disparam; sem isto o
+            conteúdo abaixo da dobra ficaria invisível. */}
+        <noscript>
+          <style>{"[data-revelar]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
+      </head>
       <body className="antialiased">
         <a
           href="#conteudo"

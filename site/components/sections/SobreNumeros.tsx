@@ -51,7 +51,7 @@ export default function SobreNumeros() {
                     </span>
                     <div>
                       <h3 className="text-base text-white">{pilar.titulo}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-grafite-400">
+                      <p className="mt-1.5 text-sm leading-relaxed text-grafite-300">
                         {pilar.descricao}
                       </p>
                     </div>
@@ -76,14 +76,14 @@ export default function SobreNumeros() {
                 <p className="mt-2 text-sm font-semibold text-ciano-400">
                   {indicador.rotulo}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-grafite-400">
+                <p className="mt-3 text-sm leading-relaxed text-grafite-300">
                   {indicador.descricao}
                 </p>
               </Card>
             </Reveal>
           ))}
 
-          <p className="text-xs text-grafite-500 sm:col-span-2">
+          <p className="text-xs text-grafite-350 sm:col-span-2">
             Os valores entre colchetes são espaços reservados e serão
             substituídos pelos números reais do estúdio.
           </p>

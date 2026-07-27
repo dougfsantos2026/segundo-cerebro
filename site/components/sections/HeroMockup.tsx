@@ -19,7 +19,7 @@ export default function HeroMockup() {
           <span className="size-2.5 rounded-full bg-[#ff5f57]" />
           <span className="size-2.5 rounded-full bg-[#febc2e]" />
           <span className="size-2.5 rounded-full bg-[#28c840]" />
-          <div className="ml-3 flex h-6 flex-1 items-center rounded-full bg-black/25 px-3 text-[11px] text-grafite-400">
+          <div className="ml-3 flex h-6 flex-1 items-center rounded-full bg-black/25 px-3 text-[11px] text-grafite-350">
             seunegocio.com.br
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function PaginaLegal({ titulo, atualizadoEm, children }: Props) {
             <h1 className="text-3xl text-white sm:text-4xl lg:text-5xl">
               {titulo}
             </h1>
-            <p className="mt-4 text-sm text-grafite-500">
+            <p className="mt-4 text-sm text-grafite-350">
               Última atualização: {atualizadoEm}
             </p>
 

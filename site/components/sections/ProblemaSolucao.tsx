@@ -13,7 +13,7 @@ export default function ProblemaSolucao() {
         titulo={
           <>
             Um site desatualizado afasta clientes{" "}
-            <span className="text-grafite-500">antes mesmo do primeiro contato</span>
+            <span className="text-grafite-400">antes mesmo do primeiro contato</span>
           </>
         }
         descricao="Na maioria das vezes o problema não é falta de visitas — é o que acontece nos primeiros segundos depois que a pessoa abre a página."
@@ -26,12 +26,12 @@ export default function ProblemaSolucao() {
             <Reveal as="li" key={problema.titulo} delay={indice * 0.05}>
               <Card className="h-full p-6">
                 <Icone
-                  className="size-6 text-grafite-400"
+                  className="size-6 text-grafite-350"
                   aria-hidden="true"
                   strokeWidth={1.75}
                 />
                 <h3 className="mt-4 text-base text-white">{problema.titulo}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-grafite-400">
+                <p className="mt-2.5 text-sm leading-relaxed text-grafite-300">
                   {problema.descricao}
                 </p>
               </Card>
@@ -67,7 +67,7 @@ export default function ProblemaSolucao() {
                 <h4 className="font-display text-base font-semibold text-white">
                   {solucao.titulo}
                 </h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-grafite-400">
+                <p className="mt-1.5 text-sm leading-relaxed text-grafite-300">
                   {solucao.descricao}
                 </p>
               </div>

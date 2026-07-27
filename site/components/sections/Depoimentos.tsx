@@ -56,7 +56,7 @@ export default function Depoimentos() {
                     "mt-5 text-lg leading-relaxed sm:text-xl",
                     atual.preenchido
                       ? "text-grafite-100"
-                      : "text-grafite-500 italic",
+                      : "text-grafite-350 italic",
                   )}
                 >
                   {atual.texto}
@@ -66,7 +66,7 @@ export default function Depoimentos() {
               <footer className="mt-7 flex items-center gap-3">
                 <span
                   aria-hidden="true"
-                  className="inline-flex size-11 items-center justify-center rounded-full bg-white/5 font-display text-sm font-bold text-grafite-400"
+                  className="inline-flex size-11 items-center justify-center rounded-full bg-white/5 font-display text-sm font-bold text-grafite-350"
                 >
                   {atual.preenchido ? atual.autor.charAt(0) : "—"}
                 </span>
@@ -74,12 +74,12 @@ export default function Depoimentos() {
                   <p
                     className={cn(
                       "text-sm font-semibold",
-                      atual.preenchido ? "text-white" : "text-grafite-500",
+                      atual.preenchido ? "text-white" : "text-grafite-350",
                     )}
                   >
                     {atual.autor}
                   </p>
-                  <p className="text-xs text-grafite-500">{atual.cargo}</p>
+                  <p className="text-xs text-grafite-350">{atual.cargo}</p>
                 </div>
               </footer>
             </div>

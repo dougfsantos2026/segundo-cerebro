@@ -2,7 +2,7 @@ import { AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const controleBase =
-  "w-full rounded-xl border bg-white/5 px-4 py-3 text-sm text-white transition-colors placeholder:text-grafite-500 focus:outline-none focus-visible:border-ciano-400 disabled:opacity-60";
+  "w-full rounded-xl border bg-white/5 px-4 py-3 text-sm text-white transition-colors placeholder:text-grafite-350 focus:outline-none focus-visible:border-ciano-400 disabled:opacity-60";
 
 const controleNormal = "border-white/15 hover:border-white/25";
 const controleInvalido = "border-red-400/70";
@@ -25,7 +25,7 @@ function Rotulo({ htmlFor, children, obrigatorio }: PropsRotulo) {
           *
         </span>
       ) : (
-        <span className="ml-1 text-xs font-normal text-grafite-500">
+        <span className="ml-1 text-xs font-normal text-grafite-350">
           (opcional)
         </span>
       )}
