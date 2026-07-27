@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --tinta: #101A18;
+  --papel: #E8EAE3;
+  --toldo: #0F5C4A;
+  --sinal: #FFC24B;
+  --cal: #FFFFFF;
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  font-family: var(--font-display), sans-serif;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.container-k {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.secao {
+  padding-top: 96px;
+  padding-bottom: 96px;
+  border-top: 1px solid rgba(16, 26, 24, 0.15);
+}
+
+@media (min-width: 768px) {
+  .secao {
+    padding-top: 144px;
+    padding-bottom: 144px;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cartao {
+  background: var(--cal);
+  border: 1px solid var(--tinta);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 var(--tinta);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+a.cartao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 var(--tinta);
+}
+
+:focus-visible {
+  outline: 2px solid var(--toldo);
+  outline-offset: 2px;
+}
+
+@keyframes subirFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anima-1 { animation: subirFade 400ms ease-out both; }
+.anima-2 { animation: subirFade 400ms ease-out 120ms both; }
+.anima-3 { animation: subirFade 400ms ease-out 240ms both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anima-1, .anima-2, .anima-3 { animation: none; }
+  .cartao { transition: none; }
+}
