@@ -2,17 +2,25 @@ import BotaoWhatsapp from "./BotaoWhatsapp";
 
 export default function CtaFinal() {
   return (
-    <section className="bg-[var(--tinta)] py-24 text-[var(--papel)]">
-      <div className="container-k text-center">
+    <section className="cta-band">
+      <div className="container-k">
         <h2>Manda uma mensagem. Sem compromisso.</h2>
-        <p className="mx-auto mt-4 max-w-prose">
+        <p
+          style={{
+            margin: "1rem auto 0",
+            maxWidth: "34rem",
+          }}
+        >
           Me diz o nome do seu negócio e o que ele faz. Eu respondo com uma
           ideia do que dá para fazer.
         </p>
-        <div className="mt-8">
+        <div style={{ marginTop: "1.75rem" }}>
           <BotaoWhatsapp />
         </div>
-        <p className="eyebrow mt-4 text-[rgba(232,234,227,0.6)]">
+        <p
+          className="eyebrow"
+          style={{ marginTop: "1rem", color: "rgba(255,254,248,0.55)" }}
+        >
           Costumo responder no mesmo dia.
         </p>
       </div>

@@ -2,32 +2,43 @@ import { linkWhatsapp } from "@/lib/whatsapp";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[rgba(16,26,24,0.15)] py-12">
-      <div className="container-k flex flex-col gap-2">
-        <span className="font-[family-name:var(--font-display)] text-2xl font-extrabold">
-          kdiff.
+    <footer className="site-footer">
+      <div className="container-k" style={{ display: "grid", gap: "0.35rem" }}>
+        <span
+          className="display"
+          style={{ fontSize: "1.75rem", fontWeight: 800 }}
+        >
+          kdiff<span style={{ color: "var(--sinal)" }}>.</span>
         </span>
-        <span className="eyebrow text-[var(--toldo)]">
-          SITES PARA NEGÓCIOS LOCAIS
+        <span className="eyebrow" style={{ color: "var(--toldo)" }}>
+          Sites para negócios locais
         </span>
-        <p className="mt-4">
+        <p style={{ marginTop: "1rem" }}>
           kdiff — a diferença aparece no celular do seu cliente.
         </p>
-        <p className="text-sm text-[rgba(16,26,24,0.7)]">
+        <p style={{ margin: 0, fontSize: "0.95rem", color: "rgba(12,22,20,0.7)" }}>
           Sites para negócios locais — São Paulo e região
         </p>
-        <p className="text-sm">
+        <p style={{ margin: "0.25rem 0 0", fontSize: "0.95rem" }}>
           contato@SEUDOMINIO ·{" "}
           <a
             href={linkWhatsapp()}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline underline-offset-4"
+            style={{ textDecoration: "underline", textUnderlineOffset: "0.22em" }}
           >
             WhatsApp
           </a>
         </p>
-        <p className="mt-4 text-sm text-[rgba(16,26,24,0.5)]">© 2026 kdiff</p>
+        <p
+          style={{
+            marginTop: "1.25rem",
+            fontSize: "0.9rem",
+            color: "rgba(12,22,20,0.5)",
+          }}
+        >
+          © 2026 kdiff
+        </p>
       </div>
     </footer>
   );

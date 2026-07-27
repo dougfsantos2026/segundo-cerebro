@@ -28,15 +28,16 @@ const perguntas = [
 export default function Faq() {
   return (
     <section className="secao">
-      <div className="container-k max-w-3xl">
-        <h2>Perguntas que sempre aparecem</h2>
-        <div className="mt-10 flex flex-col gap-3">
+      <div className="container-k">
+        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
+          FAQ
+        </p>
+        <h2 style={{ marginTop: "0.75rem" }}>Perguntas que sempre aparecem</h2>
+        <div className="faq-list">
           {perguntas.map((item) => (
-            <details key={item.p} className="cartao p-5">
-              <summary className="cursor-pointer font-semibold">
-                {item.p}
-              </summary>
-              <p className="mt-3 text-[rgba(16,26,24,0.8)]">{item.r}</p>
+            <details key={item.p} className="faq-item">
+              <summary>{item.p}</summary>
+              <p>{item.r}</p>
             </details>
           ))}
         </div>

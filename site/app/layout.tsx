@@ -1,24 +1,31 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Instrument_Sans,
+  JetBrains_Mono,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["700", "800"],
-  variable: "--font-display",
+  variable: "--font-k-display",
+  display: "swap",
 });
 
 const body = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-k-body",
+  display: "swap",
 });
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["500"],
-  variable: "--font-mono",
+  variable: "--font-k-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

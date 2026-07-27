@@ -12,16 +12,24 @@ export default function Entregaveis() {
   return (
     <section className="secao">
       <div className="container-k">
-        <h2>O que entra no seu site</h2>
-        <ul className="mt-10 grid gap-4 md:grid-cols-2">
+        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
+          O pacote
+        </p>
+        <h2 style={{ marginTop: "0.75rem" }}>O que entra no seu site</h2>
+        <ul className="check-grid">
           {itens.map((item) => (
-            <li key={item} className="flex items-start gap-3">
-              <span aria-hidden="true" className="mt-1 font-bold text-[var(--toldo)]">✓</span>
+            <li key={item} className="check-item">
+              <span className="check-item__tick" aria-hidden="true">
+                ✓
+              </span>
               <span>{item}</span>
             </li>
           ))}
         </ul>
-        <p className="eyebrow mt-10 text-[var(--toldo)]">
+        <p
+          className="eyebrow"
+          style={{ marginTop: "2rem", color: "var(--toldo)" }}
+        >
           Sem mensalidade escondida. Você é dono do domínio e do site.
         </p>
       </div>

@@ -1,15 +1,15 @@
 export default function ExtraOpcional() {
   return (
-    <section className="border-t border-[rgba(16,26,24,0.15)] py-12">
-      <div className="container-k">
-        <div className="cartao max-w-2xl p-6">
-          <p className="eyebrow text-[var(--toldo)]">Quer ir além?</p>
-          <p className="mt-3">
-            Também configuro respostas automáticas no WhatsApp para horário,
-            endereço e as perguntas que você mais recebe. É opcional e a gente
-            conversa depois que o site estiver no ar.
-          </p>
-        </div>
+    <section style={{ paddingBottom: "clamp(3rem, 6vw, 4.5rem)" }}>
+      <div className="extra">
+        <p className="eyebrow" style={{ color: "var(--toldo)", margin: 0 }}>
+          Quer ir além?
+        </p>
+        <p style={{ margin: "0.65rem 0 0" }}>
+          Também configuro respostas automáticas no WhatsApp para horário,
+          endereço e as perguntas que você mais recebe. É opcional e a gente
+          conversa depois que o site estiver no ar.
+        </p>
       </div>
     </section>
   );

@@ -22,27 +22,93 @@ const cardapio = [
 
 export default function DemoRestaurante() {
   return (
-    <div style={{ background: FUNDO, color: TEXTO }} className="min-h-screen">
+    <div style={{ background: FUNDO, color: TEXTO, minHeight: "100vh" }}>
       <FaixaDemo />
-
-      <header className="px-6 pb-16 pt-24 text-center" style={{ background: DESTAQUE, color: "white" }}>
-        <h1 className="text-4xl font-extrabold">Pizzaria do Beto</h1>
-        <p className="mt-3">Forno a lenha desde 2009. Entregamos no bairro inteiro.</p>
-        <span className="mt-6 inline-block cursor-not-allowed rounded bg-white/20 px-6 py-3 font-semibold">
+      <header
+        style={{
+          padding: "6.5rem 1.5rem 4rem",
+          textAlign: "center",
+          background: `linear-gradient(160deg, ${DESTAQUE}, #8F2A1F)`,
+          color: "white",
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            fontSize: "0.72rem",
+            opacity: 0.85,
+          }}
+        >
+          Forno a lenha
+        </p>
+        <h1
+          style={{
+            margin: "0.7rem 0 0",
+            fontSize: "clamp(2.2rem, 6vw, 3.4rem)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          Pizzaria do Beto
+        </h1>
+        <p style={{ margin: "0.9rem auto 0", maxWidth: "28rem", opacity: 0.95 }}>
+          Forno a lenha desde 2009. Entregamos no bairro inteiro.
+        </p>
+        <span
+          style={{
+            display: "inline-block",
+            marginTop: "1.5rem",
+            padding: "0.85rem 1.4rem",
+            borderRadius: 4,
+            background: "rgba(255,255,255,0.16)",
+            fontWeight: 600,
+            cursor: "not-allowed",
+          }}
+        >
           Botão de exemplo
         </span>
       </header>
 
-      <main className="mx-auto max-w-4xl px-6 py-14">
-        <h2 className="text-2xl font-bold">Cardápio</h2>
-        <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
+      <main style={{ maxWidth: 840, margin: "0 auto", padding: "3rem 1.5rem 4rem" }}>
+        <h2 style={{ fontSize: "1.6rem", letterSpacing: "-0.02em" }}>Cardápio</h2>
+        <ul
+          style={{
+            marginTop: "1.25rem",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: "0.75rem",
+            listStyle: "none",
+            padding: 0,
+          }}
+        >
           {cardapio.map((s) => (
-            <li key={s} className="rounded p-4 text-sm" style={{ background: CARTAO }}>{s}</li>
+            <li
+              key={s}
+              style={{
+                background: CARTAO,
+                borderRadius: 4,
+                padding: "1rem",
+                fontSize: "0.95rem",
+              }}
+            >
+              {s}
+            </li>
           ))}
         </ul>
 
-        <h2 className="mt-14 text-2xl font-bold">A pizzaria</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <h2 style={{ marginTop: "3rem", fontSize: "1.6rem", letterSpacing: "-0.02em" }}>
+          A pizzaria
+        </h2>
+        <div
+          style={{
+            marginTop: "1.25rem",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "0.75rem",
+          }}
+        >
           {[1, 2, 3, 4].map((n) => (
             <Image
               key={n}
@@ -50,30 +116,73 @@ export default function DemoRestaurante() {
               alt={`Foto da pizzaria, imagem ${n}`}
               width={600}
               height={400}
-              className="rounded object-cover"
+              style={{ borderRadius: 4, objectFit: "cover", width: "100%", height: "auto" }}
             />
           ))}
         </div>
 
-        <h2 className="mt-14 text-2xl font-bold">Horário de atendimento</h2>
-        <table className="mt-6 w-full max-w-md text-sm" style={{ background: CARTAO }}>
+        <h2 style={{ marginTop: "3rem", fontSize: "1.6rem", letterSpacing: "-0.02em" }}>
+          Horário de atendimento
+        </h2>
+        <table
+          style={{
+            marginTop: "1rem",
+            width: "100%",
+            maxWidth: 420,
+            background: CARTAO,
+            borderCollapse: "collapse",
+            fontSize: "0.95rem",
+          }}
+        >
           <tbody>
-            <tr className="border-b border-white/10"><td className="p-3">Terça a domingo</td><td className="p-3">18h às 23h30</td></tr>
-            <tr><td className="p-3">Segunda</td><td className="p-3">Fechado</td></tr>
+            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+              <td style={{ padding: "0.85rem" }}>Terça a domingo</td>
+              <td style={{ padding: "0.85rem" }}>18h às 23h30</td>
+            </tr>
+            <tr>
+              <td style={{ padding: "0.85rem" }}>Segunda</td>
+              <td style={{ padding: "0.85rem" }}>Fechado</td>
+            </tr>
           </tbody>
         </table>
 
-        <h2 className="mt-14 text-2xl font-bold">Delivery</h2>
-        <p className="mt-3">Entregamos em toda a região. Peça pelo telefone ou WhatsApp.</p>
+        <h2 style={{ marginTop: "3rem", fontSize: "1.6rem", letterSpacing: "-0.02em" }}>
+          Delivery
+        </h2>
+        <p style={{ marginTop: "0.7rem" }}>
+          Entregamos em toda a região. Peça pelo telefone ou WhatsApp.
+        </p>
 
-        <h2 className="mt-14 text-2xl font-bold">Onde estamos</h2>
-        <p className="mt-3">Rua Exemplo, 123 — Bairro Fictício, São Paulo · (11) 0000-0000</p>
-        <div className="mt-4 flex h-56 items-center justify-center rounded text-neutral-400" style={{ background: "#3A302A" }}>
+        <h2 style={{ marginTop: "3rem", fontSize: "1.6rem", letterSpacing: "-0.02em" }}>
+          Onde estamos
+        </h2>
+        <p style={{ marginTop: "0.7rem" }}>
+          Rua Exemplo, 123 — Bairro Fictício, São Paulo · (11) 0000-0000
+        </p>
+        <div
+          style={{
+            marginTop: "1rem",
+            height: 220,
+            borderRadius: 4,
+            background: "#3A302A",
+            color: "#b8aea4",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
           Mapa vai aqui
         </div>
       </main>
 
-      <footer className="px-6 py-10 text-center text-sm" style={{ background: DESTAQUE, color: "white" }}>
+      <footer
+        style={{
+          padding: "2.25rem 1.5rem",
+          textAlign: "center",
+          background: DESTAQUE,
+          color: "white",
+          fontSize: "0.92rem",
+        }}
+      >
         Pizzaria do Beto — site de exemplo criado pela kdiff
       </footer>
     </div>

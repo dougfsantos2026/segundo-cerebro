@@ -25,19 +25,23 @@ export default function ComoFunciona() {
   return (
     <section className="secao">
       <div className="container-k">
-        <h2>Do primeiro contato ao site no ar</h2>
-        <ol className="mt-10 grid gap-8 md:grid-cols-2">
+        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
+          O processo
+        </p>
+        <h2 style={{ marginTop: "0.75rem" }}>
+          Do primeiro contato ao site no ar
+        </h2>
+        <ol className="steps">
           {passos.map((p, i) => (
-            <li key={p.titulo} className="flex gap-5">
-              <span
-                aria-hidden="true"
-                className="font-[family-name:var(--font-display)] text-4xl font-extrabold text-[var(--toldo)]"
-              >
+            <li key={p.titulo} className="step">
+              <span className="step__n" aria-hidden="true">
                 {i + 1}
               </span>
               <div>
-                <h3 className="font-semibold">{p.titulo}</h3>
-                <p className="mt-2 text-[rgba(16,26,24,0.8)]">{p.texto}</p>
+                <h3>{p.titulo}</h3>
+                <p style={{ margin: "0.45rem 0 0", color: "rgba(12,22,20,0.78)" }}>
+                  {p.texto}
+                </p>
               </div>
             </li>
           ))}

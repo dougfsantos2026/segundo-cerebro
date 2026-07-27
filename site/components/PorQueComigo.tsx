@@ -7,27 +7,30 @@ const dados = [
 export default function PorQueComigo() {
   return (
     <section className="secao">
-      <div className="container-k grid gap-12 md:grid-cols-[2fr_1fr]">
+      <div className="container-k about-grid">
         <div>
-          <h2>Quem faz o seu site</h2>
-          <p className="mt-6 max-w-prose">
+          <p className="eyebrow" style={{ color: "var(--toldo)" }}>
+            Quem faz
+          </p>
+          <h2 style={{ marginTop: "0.75rem" }}>Quem faz o seu site</h2>
+          <p style={{ marginTop: "1.25rem", maxWidth: "38rem" }}>
             Sou Douglas. Passei os últimos 13 anos testando software para
             empresas grandes — meu trabalho literalmente era achar o que quebra
             antes do cliente achar. Aplico o mesmo cuidado aqui: seu site é
             testado em celular antigo, internet ruim e tela pequena antes de
             entrar no ar.
           </p>
-          <p className="mt-4 max-w-prose">
+          <p style={{ marginTop: "0.9rem", maxWidth: "38rem" }}>
             Você fala comigo, não com atendente. E não sumo depois da entrega.
           </p>
         </div>
-        <dl className="flex flex-col gap-8 md:border-l md:border-[rgba(16,26,24,0.15)] md:pl-8">
+        <dl>
           {dados.map((d) => (
-            <div key={d.rotulo}>
-              <dt className="eyebrow text-[rgba(16,26,24,0.6)]">{d.rotulo}</dt>
-              <dd className="font-[family-name:var(--font-display)] text-3xl font-extrabold text-[var(--toldo)]">
-                {d.numero}
-              </dd>
+            <div key={d.rotulo} className="stat">
+              <dt className="eyebrow" style={{ color: "rgba(12,22,20,0.55)" }}>
+                {d.rotulo}
+              </dt>
+              <dd className="stat__n">{d.numero}</dd>
             </div>
           ))}
         </dl>
