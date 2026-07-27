@@ -232,8 +232,19 @@ img {
   color: rgba(12, 22, 20, 0.42);
 }
 
+.hero__photo {
+  margin-top: 1.1rem;
+  flex: 1 1 auto;
+  min-height: 7rem;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(12, 22, 20, 0.08), rgba(12, 22, 20, 0.02)),
+    url("/demos/salao-1.jpg") center/cover no-repeat;
+  box-shadow: inset 0 0 0 1px rgba(12, 22, 20, 0.06);
+}
+
 .hero__skeleton {
-  margin-top: auto;
+  margin-top: 0.9rem;
   display: grid;
   gap: 0.55rem;
 }

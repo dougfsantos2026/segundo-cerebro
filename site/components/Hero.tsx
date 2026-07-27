@@ -18,6 +18,7 @@ export default function Hero() {
               {nomeExibido}
             </span>
             <p className="eyebrow hero__sign-nav">Início · Serviços · Contato</p>
+            <div className="hero__photo" />
             <div className="hero__skeleton">
               <span />
               <span />
