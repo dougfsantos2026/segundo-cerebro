@@ -1,44 +1,97 @@
-import type { Metadata } from "next";
-import {
-  Instrument_Serif,
-  Manrope,
-  JetBrains_Mono,
-} from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Sora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { contato, redesSociais, siteConfig, siteUrl } from "@/lib/site-config";
 import "./globals.css";
 
-const display = Instrument_Serif({
+const sora = Sora({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-k-display",
+  weight: ["600", "700", "800"],
+  variable: "--font-sora",
   display: "swap",
 });
 
-const body = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-k-body",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-k-mono",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "kdiff — Sites para negócios locais em São Paulo",
-  description:
-    "Sites rápidos para clínicas, salões, lojas e restaurantes. Feitos para celular, com WhatsApp integrado e prontos para aparecer no Google.",
-  openGraph: {
-    title: "kdiff — Sites para negócios locais",
-    description:
-      "Sites rápidos para clínicas, salões, lojas e restaurantes. Feitos para celular, com WhatsApp integrado e prontos para aparecer no Google.",
-    locale: "pt_BR",
-    type: "website",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteConfig.nome} — ${siteConfig.tagline}`,
+    template: `%s — ${siteConfig.nome}`,
   },
+  description: siteConfig.descricao,
+  applicationName: siteConfig.nome,
+  keywords: [
+    "criação de sites",
+    "site profissional",
+    "site para pequenas empresas",
+    "landing page",
+    "site para clínica",
+    "site para advogado",
+    "site para restaurante",
+    "desenvolvimento web",
+  ],
+  authors: [{ name: siteConfig.nome, url: siteUrl }],
+  creator: siteConfig.nome,
+  publisher: siteConfig.nome,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteUrl,
+    siteName: siteConfig.nome,
+    title: `${siteConfig.nome} — ${siteConfig.tagline}`,
+    description: siteConfig.descricao,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.nome} — ${siteConfig.tagline}`,
+    description: siteConfig.descricao,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b0f16",
+  colorScheme: "dark",
+};
+
+/** Dados estruturados da empresa, válidos para todas as páginas. */
+const dadosEstruturadosEmpresa = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${siteUrl}/#organizacao`,
+  name: siteConfig.nome,
+  alternateName: siteConfig.nomeCompleto,
+  description: siteConfig.descricao,
+  url: siteUrl,
+  email: contato.email,
+  telephone: `+${contato.whatsapp}`,
+  areaServed: siteConfig.areaAtendimento,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: contato.cidade,
+    addressRegion: contato.estado,
+    addressCountry: "BR",
+  },
+  sameAs: redesSociais.map((rede) => rede.href),
+  knowsLanguage: "pt-BR",
+  serviceType: [
+    "Criação de sites",
+    "Landing pages",
+    "Lojas virtuais",
+    "Otimização para mecanismos de busca",
+  ],
 };
 
 export default function RootLayout({
@@ -46,25 +99,25 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="pt-BR"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      lang={siteConfig.idioma}
+      className={`${sora.variable} ${inter.variable}`}
     >
-      <body>
+      <body className="antialiased">
+        <a
+          href="#conteudo"
+          className="sr-only-focusable absolute top-4 left-4 z-[60] rounded-full bg-marca-600 px-5 py-3 text-sm font-semibold text-white"
+        >
+          Pular para o conteúdo
+        </a>
+
         <script
           type="application/ld+json"
+          // Conteúdo estático definido no servidor, sem entrada de usuário.
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: "kdiff",
-              url: "https://SEUDOMINIO",
-              telephone: "+SEUNUMERO",
-              areaServed: "São Paulo",
-              description:
-                "Criação de sites para negócios locais: clínicas, salões, lojas e restaurantes.",
-            }),
+            __html: JSON.stringify(dadosEstruturadosEmpresa),
           }}
         />
+
         {children}
         <Analytics />
       </body>

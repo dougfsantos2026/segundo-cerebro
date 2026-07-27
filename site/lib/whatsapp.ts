@@ -1,9 +1,17 @@
-// Substituir SEUNUMERO pelos dígitos reais, ex: "5511999999999"
-export const TELEFONE = "SEUNUMERO";
+import { mensagemWhatsappPadrao, whatsappNumero } from "./site-config";
 
-export function linkWhatsapp(nomeNegocio?: string) {
-  const texto = nomeNegocio && nomeNegocio.trim().length > 0
-    ? `Oi! Sou do ${nomeNegocio.trim()} e quero um site.`
-    : "Oi! Vi o site da kdiff e quero um orçamento.";
-  return `https://wa.me/${TELEFONE}?text=${encodeURIComponent(texto)}`;
+/**
+ * Monta o link do WhatsApp. O número vem sempre da configuração central,
+ * nunca de valores fixos espalhados pelos componentes.
+ */
+export function linkWhatsapp(mensagem: string = mensagemWhatsappPadrao) {
+  const numero = whatsappNumero.replace(/\D/g, "");
+  return `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+}
+
+/** Link com mensagem contextualizada por serviço ou plano. */
+export function linkWhatsappSobre(assunto: string) {
+  return linkWhatsapp(
+    `Olá! Conheci o site e gostaria de saber mais sobre ${assunto}.`,
+  );
 }

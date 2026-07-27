@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FaixaDemo from "@/components/FaixaDemo";
+import FaixaDemo from "@/components/layout/FaixaDemo";
 
 export const metadata = {
   title: "Exemplo: Studio Vera Cabelo — kdiff",
