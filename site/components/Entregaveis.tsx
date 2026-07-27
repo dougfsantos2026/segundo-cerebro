@@ -10,12 +10,10 @@ const itens = [
 
 export default function Entregaveis() {
   return (
-    <section className="secao">
+    <section className="secao secao--paper">
       <div className="container-k">
-        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-          O pacote
-        </p>
-        <h2 style={{ marginTop: "0.75rem" }}>O que entra no seu site</h2>
+        <p className="eyebrow accent">O pacote</p>
+        <h2 className="section-title">O que entra no seu site</h2>
         <ul className="check-grid">
           {itens.map((item) => (
             <li key={item} className="check-item">
@@ -26,10 +24,7 @@ export default function Entregaveis() {
             </li>
           ))}
         </ul>
-        <p
-          className="eyebrow"
-          style={{ marginTop: "2rem", color: "var(--toldo)" }}
-        >
+        <p className="eyebrow accent" style={{ marginTop: "2rem" }}>
           Sem mensalidade escondida. Você é dono do domínio e do site.
         </p>
       </div>

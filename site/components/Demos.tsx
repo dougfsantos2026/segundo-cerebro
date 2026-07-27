@@ -26,52 +26,46 @@ const demos = [
 
 export default function Demos() {
   return (
-    <section id="demos" className="secao">
+    <section id="demos" className="secao secao--paper">
       <div className="container-k">
-        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-          Exemplos
-        </p>
-        <h2 style={{ marginTop: "0.75rem" }}>Sites de exemplo</h2>
-        <p style={{ marginTop: "0.9rem", maxWidth: "38rem" }}>
+        <p className="eyebrow accent">Exemplos</p>
+        <h2 className="section-title">Sites de exemplo</h2>
+        <p className="section-lead">
           Modelos navegáveis que uso como ponto de partida. O seu é feito com as
           suas fotos, seus serviços e seus horários.
         </p>
-        <div className="demo-grid">
-          {demos.map((d) => (
-            <a key={d.href} href={d.href} className="link-demo demo-card">
-              <div className="demo-card__media">
-                <Image
-                  src={d.img}
-                  alt={d.alt}
-                  width={600}
-                  height={450}
-                  sizes="(max-width: 900px) 100vw, 33vw"
-                />
+
+        <div className="demo-stack">
+          {demos.map((d, i) => (
+            <a
+              key={d.href}
+              href={d.href}
+              className={`demo-row${i % 2 === 1 ? " demo-row--flip" : ""}`}
+            >
+              <div className="demo-row__frame">
+                <div className="browser browser--compact">
+                  <div className="browser__chrome">
+                    <span />
+                    <span />
+                    <span />
+                    <div className="browser__url">exemplo.kdiff</div>
+                  </div>
+                  <div className="demo-row__media">
+                    <Image
+                      src={d.img}
+                      alt={d.alt}
+                      width={900}
+                      height={620}
+                      sizes="(max-width: 900px) 100vw, 55vw"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="demo-card__body">
-                <span className="eyebrow demo-card__label">Exemplo</span>
-                <h3 style={{ marginTop: "0.55rem" }}>{d.titulo}</h3>
-                <p
-                  style={{
-                    margin: "0.4rem 0 0",
-                    fontSize: "0.95rem",
-                    color: "rgba(12,22,20,0.7)",
-                  }}
-                >
-                  {d.subtitulo}
-                </p>
-                <span
-                  style={{
-                    display: "inline-block",
-                    marginTop: "1rem",
-                    color: "var(--toldo)",
-                    fontWeight: 600,
-                    textDecoration: "underline",
-                    textUnderlineOffset: "0.22em",
-                  }}
-                >
-                  Ver o exemplo
-                </span>
+              <div className="demo-row__copy">
+                <span className="eyebrow muted">Exemplo 0{i + 1}</span>
+                <h3>{d.titulo}</h3>
+                <p>{d.subtitulo}</p>
+                <span className="text-link">Ver o exemplo</span>
               </div>
             </a>
           ))}

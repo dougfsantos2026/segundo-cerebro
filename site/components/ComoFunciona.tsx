@@ -23,14 +23,10 @@ const passos = [
 
 export default function ComoFunciona() {
   return (
-    <section className="secao">
+    <section id="processo" className="secao">
       <div className="container-k">
-        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-          O processo
-        </p>
-        <h2 style={{ marginTop: "0.75rem" }}>
-          Do primeiro contato ao site no ar
-        </h2>
+        <p className="eyebrow accent">O processo</p>
+        <h2 className="section-title">Do primeiro contato ao site no ar</h2>
         <ol className="steps">
           {passos.map((p, i) => (
             <li key={p.titulo} className="step">
@@ -39,7 +35,7 @@ export default function ComoFunciona() {
               </span>
               <div>
                 <h3>{p.titulo}</h3>
-                <p style={{ margin: "0.45rem 0 0", color: "rgba(12,22,20,0.78)" }}>
+                <p style={{ margin: "0.45rem 0 0", color: "var(--ink-soft)" }}>
                   {p.texto}
                 </p>
               </div>

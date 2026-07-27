@@ -2,7 +2,7 @@ export default function ExtraOpcional() {
   return (
     <section style={{ paddingBottom: "clamp(3rem, 6vw, 4.5rem)" }}>
       <div className="extra">
-        <p className="eyebrow" style={{ color: "var(--toldo)", margin: 0 }}>
+        <p className="eyebrow accent" style={{ margin: 0 }}>
           Quer ir além?
         </p>
         <p style={{ margin: "0.65rem 0 0" }}>

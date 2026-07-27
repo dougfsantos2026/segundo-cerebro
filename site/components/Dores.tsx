@@ -23,10 +23,8 @@ export default function Dores() {
   return (
     <section className="secao">
       <div className="container-k">
-        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-          O problema
-        </p>
-        <h2 style={{ marginTop: "0.75rem" }}>Provavelmente é assim hoje</h2>
+        <p className="eyebrow accent">O problema</p>
+        <h2 className="section-title">Provavelmente é assim hoje</h2>
         <div className="pain-list">
           {dores.map((d) => (
             <article key={d.titulo} className="pain-item">
@@ -35,7 +33,7 @@ export default function Dores() {
               </span>
               <div>
                 <h3>{d.titulo}</h3>
-                <p style={{ margin: "0.55rem 0 0", color: "rgba(12,22,20,0.78)" }}>
+                <p style={{ margin: "0.55rem 0 0", color: "var(--ink-soft)" }}>
                   {d.texto}
                 </p>
               </div>

@@ -9,10 +9,8 @@ export default function PorQueComigo() {
     <section className="secao">
       <div className="container-k about-grid">
         <div>
-          <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-            Quem faz
-          </p>
-          <h2 style={{ marginTop: "0.75rem" }}>Quem faz o seu site</h2>
+          <p className="eyebrow accent">Quem faz</p>
+          <h2 className="section-title">Quem faz o seu site</h2>
           <p style={{ marginTop: "1.25rem", maxWidth: "38rem" }}>
             Sou Douglas. Passei os últimos 13 anos testando software para
             empresas grandes — meu trabalho literalmente era achar o que quebra
@@ -27,9 +25,7 @@ export default function PorQueComigo() {
         <dl>
           {dados.map((d) => (
             <div key={d.rotulo} className="stat">
-              <dt className="eyebrow" style={{ color: "rgba(12,22,20,0.55)" }}>
-                {d.rotulo}
-              </dt>
+              <dt className="eyebrow muted">{d.rotulo}</dt>
               <dd className="stat__n">{d.numero}</dd>
             </div>
           ))}

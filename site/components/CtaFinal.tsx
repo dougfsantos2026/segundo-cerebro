@@ -19,7 +19,7 @@ export default function CtaFinal() {
         </div>
         <p
           className="eyebrow"
-          style={{ marginTop: "1rem", color: "rgba(255,254,248,0.55)" }}
+          style={{ marginTop: "1rem", color: "rgba(255,255,255,0.5)" }}
         >
           Costumo responder no mesmo dia.
         </p>

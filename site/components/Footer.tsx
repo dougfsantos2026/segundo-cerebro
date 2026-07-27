@@ -4,15 +4,10 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container-k" style={{ display: "grid", gap: "0.35rem" }}>
-        <span
-          className="display"
-          style={{ fontSize: "1.75rem", fontWeight: 800 }}
-        >
-          kdiff<span style={{ color: "var(--sinal)" }}>.</span>
+        <span className="display" style={{ fontSize: "1.9rem" }}>
+          kdiff<span className="brand-dot">.</span>
         </span>
-        <span className="eyebrow" style={{ color: "var(--toldo)" }}>
-          Sites para negócios locais
-        </span>
+        <span className="eyebrow accent">Sites para negócios locais</span>
         <p style={{ marginTop: "1rem" }}>
           kdiff — a diferença aparece no celular do seu cliente.
         </p>

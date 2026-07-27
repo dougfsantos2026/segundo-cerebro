@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import {
-  Bricolage_Grotesque,
-  Instrument_Sans,
+  Instrument_Serif,
+  Manrope,
   JetBrains_Mono,
 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["400"],
   variable: "--font-k-display",
   display: "swap",
 });
 
-const body = Instrument_Sans({
+const body = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-k-body",
   display: "swap",
 });

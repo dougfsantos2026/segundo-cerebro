@@ -29,10 +29,8 @@ export default function Faq() {
   return (
     <section className="secao">
       <div className="container-k">
-        <p className="eyebrow" style={{ color: "var(--toldo)" }}>
-          FAQ
-        </p>
-        <h2 style={{ marginTop: "0.75rem" }}>Perguntas que sempre aparecem</h2>
+        <p className="eyebrow accent">FAQ</p>
+        <h2 className="section-title">Perguntas que sempre aparecem</h2>
         <div className="faq-list">
           {perguntas.map((item) => (
             <details key={item.p} className="faq-item">
