@@ -34,9 +34,8 @@ export default function Hero() {
             Seu negócio tem endereço na rua. Falta um na internet.
           </h1>
           <p className="hero__lead">
-            Faço sites para clínicas, salões, lojas e restaurantes de bairro.
-            Feitos para o celular, com WhatsApp em todo canto e prontos para
-            aparecer no Google.
+            Sites para clínicas, salões, lojas e restaurantes. Feitos para o
+            celular, com WhatsApp em todo canto e prontos para o Google.
           </p>
 
           <div className="hero__composer">
@@ -58,7 +57,7 @@ export default function Hero() {
           </div>
 
           <a href="#demos" className="hero__secondary">
-            Ver sites de exemplo
+            ↓ Ver sites de exemplo
           </a>
         </div>
 
@@ -78,11 +77,10 @@ export default function Hero() {
                 <span>Início · Serviços · Contato</span>
               </div>
               <div className="browser__preview-hero">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="/demos/pizza-1.jpg"
                   alt=""
-                  fill
-                  sizes="(max-width: 900px) 90vw, 480px"
                   className="browser__preview-img"
                 />
                 <div className="browser__preview-overlay">
