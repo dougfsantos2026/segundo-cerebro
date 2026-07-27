@@ -123,3 +123,7 @@ python3 scripts/testa-interacoes.py                    # menu, FAQ, carrossel, f
 python3 scripts/testa-acessibilidade.py                # teclado, ARIA, movimento reduzido
 python3 scripts/verifica-contraste.py                  # contraste WCAG
 ```
+
+Para revisão visual, `captura-secoes.py` gera uma imagem por seção e
+`filmstrip-mobile.py` percorre a home no celular em capturas sequenciais.
+Ambos precisam do Chrome instalado e do pacote `websocket-client`.
