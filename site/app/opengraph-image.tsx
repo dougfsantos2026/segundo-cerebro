@@ -36,29 +36,28 @@ export default function OpenGraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              fontSize: 68,
-              fontWeight: 800,
-              color: "#ffffff",
-              lineHeight: 1.1,
-              letterSpacing: -2,
-            }}
-          >
-            Sites profissionais que
-          </div>
-          <div
-            style={{
-              fontSize: 68,
-              fontWeight: 800,
-              color: "#6E9BFF",
-              lineHeight: 1.1,
-              letterSpacing: -2,
-            }}
-          >
-            transformam visitantes em clientes
-          </div>
-          <div style={{ marginTop: 28, fontSize: 28, color: "#94A3B8" }}>
+          {/* Linhas fixas com `nowrap`: sem isso o texto reflui e desequilibra. */}
+          {[
+            { texto: "Sites profissionais que", cor: "#ffffff" },
+            { texto: "transformam visitantes", cor: "#6E9BFF" },
+            { texto: "em clientes.", cor: "#35D6EE" },
+          ].map((linha) => (
+            <div
+              key={linha.texto}
+              style={{
+                display: "flex",
+                fontSize: 66,
+                fontWeight: 700,
+                color: linha.cor,
+                lineHeight: 1.16,
+                letterSpacing: -2,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {linha.texto}
+            </div>
+          ))}
+          <div style={{ marginTop: 26, fontSize: 27, color: "#94A3B8" }}>
             Criação de sites para pequenos e médios negócios
           </div>
         </div>
