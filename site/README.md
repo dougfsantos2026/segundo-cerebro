@@ -116,13 +116,36 @@ imagem vem de domínio externo em tempo de execução.
 | Arquivo | Onde aparece |
 | --- | --- |
 | `mascara-marca.svg` | recorte do “k” usado como máscara alfa (gerado por script, não é foto) |
-| `textura-aurora.webp` | superfície que preenche o recorte da marca |
+| `cena-aurora.webp` | ilustração de fundo que preenche o recorte da marca |
+| `figura-costas.webp` | pessoa de costas olhando o celular, primeira pose do giro |
+| `figura-perfil.webp` | a mesma pessoa de perfil com o celular erguido, segunda pose |
 | `equipe-trabalho.webp` | seção “Sobre o estúdio” |
 | `segmento-*.webp` (6) | prévias dos projetos do portfólio |
 
-As fotos vêm do Unsplash, sob a [licença da plataforma](https://unsplash.com/license).
-Autoria, endereço da página e descrição de cada uma ficam em
-`public/images/creditos.json`.
+As fotos de seção vêm do Unsplash, sob a
+[licença da plataforma](https://unsplash.com/license). A cena da marca e as duas
+poses da figura são ilustrações originais feitas para o projeto. Autoria,
+origem e descrição de cada arquivo ficam em `public/images/creditos.json`.
+
+### A cena dentro da marca
+
+O “k” do topo não é uma imagem só: é uma pilha de camadas recortada pela máscara
+alfa da letra, montada em `components/visual/MarcaAurora.tsx`. De trás para a
+frente vêm a ilustração da aurora, o brilho que acende e apaga, o céu que
+cintila, as esferas que sobem e, sobre a linha do horizonte, a figura.
+
+O caminho óbvio seria um vídeo, e é o que a maior parte dos sites faz. Em
+camadas o topo carrega cerca de cem quilobytes em vez de alguns megabytes, a
+cena continua nítida em qualquer resolução, e cada movimento pode parar sozinho
+quando o sistema pede menos animação — coisas que um `.webm` não entrega.
+
+O giro da figura merece nota. Ele é feito com duas poses da mesma pessoa
+trocadas na mesma caixa, e uma troca simples mostraria dois corpos por um
+instante. O que resolve é imitar a rotação de verdade: ao virar noventa graus o
+corpo passa da largura dos ombros para a espessura do tronco, então cada pose
+estreita até a metade no ponto da troca e a passagem acontece de perfil, sem
+largura para as duas se sobreporem. Um desfoque curto no mesmo ponto cobre o
+resto.
 
 ### Movimento
 
@@ -130,9 +153,19 @@ Todos os laços animam apenas `transform` e `opacity`, resolvidos na GPU, e
 nenhum altera o tamanho do elemento — por isso não há deslocamento de conteúdo
 enquanto rodam. As curvas estão em `globals.css`, sob `@layer utilities`.
 
+As cinco animações do laço da marca compartilham a mesma duração de 8s de
+propósito: é o que faz o giro da figura, o brilho da aurora e a aproximação da
+câmera recomeçarem no mesmo quadro, sem uma arrastar a outra.
+
 | Animação | Duração | Onde |
 | --- | --- | --- |
-| `aurora-deriva` | 22s / 26s / 30s | manchas de cor dentro do recorte da marca |
+| `girar-para-perfil` / `girar-para-costas` | 8s | as duas poses da figura dentro da marca |
+| `acender-aurora` | 8s | brilho da aurora subindo e descendo |
+| `respirar` | 4s | oscilação vertical do corpo inteiro |
+| `cintilar` | 5,5s / 7s | duas camadas de estrelas em ritmos diferentes |
+| `subir-esfera` | 13s a 21s | quatro esferas de luz atravessando a cena |
+| `aproximar-cena` | 24s | aproximação lenta da câmera sobre a ilustração |
+| `aurora-deriva` | 22s / 30s | manchas de cor passeando por trás do brilho |
 | `flutuar` | 6s / 7s | selos de desempenho e prévia de celular no topo |
 | `varredura` | 7s | reflexo que cruza a janela do mockup |
 | `girar-lento` | 40s | gradiente cônico sob o bloco principal do mockup |
@@ -183,10 +216,20 @@ Para revisão visual, `captura.py` tira telas do site local (`--completo` fatia 
 página inteira, `--larguras` escolhe as viewports), `captura-secoes.py` gera uma
 imagem por seção e `filmstrip-mobile.py` percorre a home no celular.
 
+O laço da marca não cabe numa captura só — cada tela pega um instante escolhido
+pelo acaso do carregamento. `amostra-cena.py` pausa as animações do laço, move o
+relógio delas à mão e monta uma tira com o ciclo inteiro, o que torna a revisão
+comparável entre execuções:
+
+```bash
+python3 scripts/amostra-cena.py --quadros 16
+```
+
 Os scripts de apoio ao trabalho visual ficam no mesmo diretório:
 `analisa-referencia.py` e `analisa-animacoes-referencia.py` inspecionam um site
 externo; `escolhe-fotos.py`, `fixa-foto.py` e `baixa-fotos.py` buscam, convertem
 e registram fotografia do Unsplash; `gera-mascara-marca.py` reescreve o SVG do
-recorte da marca.
+recorte da marca; `recorta-figura.py` tira as poses da figura do fundo branco e
+alinha uma com a outra.
 
 Todos precisam do Chrome instalado e do pacote `websocket-client`.
