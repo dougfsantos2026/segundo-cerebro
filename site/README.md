@@ -153,9 +153,10 @@ Todos os laços animam apenas `transform` e `opacity`, resolvidos na GPU, e
 nenhum altera o tamanho do elemento — por isso não há deslocamento de conteúdo
 enquanto rodam. As curvas estão em `globals.css`, sob `@layer utilities`.
 
-As cinco animações do laço da marca compartilham a mesma duração de 8s de
-propósito: é o que faz o giro da figura, o brilho da aurora e a aproximação da
-câmera recomeçarem no mesmo quadro, sem uma arrastar a outra.
+O giro da figura e o brilho da aurora dividem a mesma duração de 8s, para que a
+aurora esteja no auge quando a figura está de perfil. As outras camadas correm
+em tempos próprios: períodos que não se dividem entre si demoram muito a
+coincidir, e o céu nunca repete exatamente o mesmo desenho.
 
 | Animação | Duração | Onde |
 | --- | --- | --- |

@@ -341,10 +341,11 @@
  * Ciclo da cena dentro da marca.
  *
  * Os tempos vêm do laço de 8s observado na referência: a figura gira de costas
- * para o perfil em cerca de 1,5s, fica assim por 5s e volta nos 1,5s finais.
- * As porcentagens abaixo são essa contagem convertida — 19% são os 1,5s, 81%
- * são os 6,5s. Como todas as camadas usam a mesma duração, elas voltam juntas
- * ao ponto de partida e o laço não tem emenda.
+ * para o perfil no começo, fica assim pela maior parte do ciclo e volta no fim.
+ * O giro e o brilho da aurora dividem esses 8s, então recomeçam no mesmo
+ * quadro. As demais camadas — estrelas, esferas e a aproximação da câmera —
+ * correm em tempos próprios de propósito: períodos que não se dividem entre si
+ * demoram muito a coincidir, e o céu nunca repete o mesmo desenho.
  */
 
 /*
@@ -508,9 +509,8 @@
   /*
    * Camadas da cena dentro da marca.
    *
-   * As cinco que compõem o laço de 8s dividem a mesma duração de propósito: é
-   * o que faz o giro da figura, o brilho da aurora e a aproximação da câmera
-   * recomeçarem no mesmo quadro, sem uma arrastar a outra.
+   * O giro e o brilho dividem os mesmos 8s, para que a aurora esteja no auge
+   * quando a figura está de perfil. O resto corre solto.
    */
   /* Linear de propósito: a aceleração do giro já está na distribuição das
      paradas, e um easing por trecho faria o corpo travar em cada uma. */
