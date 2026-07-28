@@ -3,6 +3,7 @@ import { segmentos } from "@/data/segmentos";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import FaixaCorrente from "@/components/visual/FaixaCorrente";
 
 export default function Beneficios() {
   return (
@@ -10,7 +11,11 @@ export default function Beneficios() {
       <SectionHeading
         tom="claro"
         etiqueta="Diferenciais"
-        titulo="O que vem junto em todo projeto"
+        titulo={
+          <>
+            O que vem <span className="texto-gradiente">junto em todo projeto</span>
+          </>
+        }
         descricao="Não é uma lista de extras cobrados à parte. É o padrão mínimo que consideramos necessário para um site ser chamado de profissional."
       />
 
@@ -42,12 +47,20 @@ export default function Beneficios() {
         <h3 className="text-sm font-semibold tracking-[0.14em] text-grafite-500 uppercase">
           Segmentos que atendemos
         </h3>
-        <ul className="mt-6 flex flex-wrap gap-2.5">
+      </Reveal>
+
+      {/* A faixa sai da grade e ocupa a largura da tela: é o movimento que
+          quebra a sequência de blocos estáticos desta seção. */}
+      <FaixaCorrente
+        duracao="46s"
+        className="mt-6 -mr-5 -ml-5 sm:-mr-8 sm:-ml-8"
+      >
+        <ul className="flex items-center gap-2.5 pr-2.5">
           {segmentos.map((segmento) => {
             const Icone = segmento.icone;
             return (
               <li key={segmento.nome}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-grafite-200 bg-white px-4 py-2 text-sm text-grafite-700">
+                <span className="inline-flex items-center gap-2 rounded-full border border-grafite-200 bg-white px-4 py-2 text-sm whitespace-nowrap text-grafite-700">
                   <Icone
                     className="size-4 text-marca-600"
                     aria-hidden="true"
@@ -59,7 +72,7 @@ export default function Beneficios() {
             );
           })}
         </ul>
-      </Reveal>
+      </FaixaCorrente>
     </Section>
   );
 }

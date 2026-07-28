@@ -2,7 +2,9 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import Parallax from "@/components/ui/Parallax";
 import Reveal from "@/components/ui/Reveal";
+import MarcaAurora from "@/components/visual/MarcaAurora";
 import HeroMockup from "./HeroMockup";
 
 export default function Hero() {
@@ -30,9 +32,8 @@ export default function Hero() {
             </Reveal>
 
             <Reveal delay={0.06}>
-              <h1 className="mt-6 text-4xl text-white sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-                Sites profissionais que transformam{" "}
-                <span className="texto-gradiente">visitantes em clientes</span>.
+              <h1 className="texto-gradiente-hero mt-6 text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem]">
+                Sites profissionais que transformam visitantes em clientes.
               </h1>
             </Reveal>
 
@@ -68,9 +69,35 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} origem="direita" className="lg:pl-4">
-            <HeroMockup />
-          </Reveal>
+          {/*
+            Duas camadas: a marca recortada emoldura o mockup por trás e sangra
+            para fora da coluna. O parallax move só ela, o que abre uma
+            diferença de profundidade entre o fundo e o mockup à frente.
+          */}
+          {/*
+            A marca ocupa o alto da coluna e o mockup entra por baixo, cobrindo
+            só a perna esquerda do recorte. É esse desencontro que mantém a
+            letra legível — quando o mockup subia, escondia justo a junção dos
+            traços e o “k” virava um losango sem sentido.
+          */}
+          <div className="relative md:pt-36 lg:pt-44">
+            <Parallax
+              distancia={50}
+              className="pointer-events-none absolute -top-32 -right-24 hidden h-[26rem] md:block lg:-top-40 lg:-right-32 lg:h-[31rem]"
+            >
+              <MarcaAurora className="aspect-560/600 h-full" />
+            </Parallax>
+
+            <MarcaAurora className="pointer-events-none absolute -top-14 right-2 aspect-560/600 h-48 opacity-60 md:hidden" />
+
+            <Reveal
+              delay={0.15}
+              origem="direita"
+              className="relative z-10 md:mr-16 lg:-ml-8 lg:mr-14"
+            >
+              <HeroMockup />
+            </Reveal>
+          </div>
         </div>
       </Container>
     </section>

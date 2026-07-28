@@ -11,7 +11,12 @@ export default function Servicos() {
       <SectionHeading
         tom="claro"
         etiqueta="Serviços"
-        titulo="O que podemos construir para o seu negócio"
+        titulo={
+          <>
+            O que podemos{" "}
+            <span className="texto-gradiente">construir para o seu negócio</span>
+          </>
+        }
         descricao="Do site institucional à loja virtual, cada projeto é montado sobre a mesma base: velocidade, clareza e um caminho evidente até o contato."
       />
 

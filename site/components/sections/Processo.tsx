@@ -9,7 +9,12 @@ export default function Processo() {
       <SectionHeading
         tom="claro"
         etiqueta="Como funciona"
-        titulo="Um processo claro, do primeiro contato ao site no ar"
+        titulo={
+          <>
+            Um <span className="texto-gradiente">processo claro</span>, do primeiro
+            contato ao site no ar
+          </>
+        }
         descricao="Você sabe exatamente em que etapa o projeto está e o que se espera de você em cada uma delas."
       />
 

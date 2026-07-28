@@ -7,7 +7,10 @@ type Tamanho = "md" | "lg";
 // Sem `whitespace-nowrap`: rótulos longos precisam poder quebrar em telas
 // estreitas, senão fixam uma largura mínima maior que a do celular.
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full text-center font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60";
+  // `translate` na lista de transição, e não `transform`: no Tailwind v4 as
+  // utilidades de deslocamento escrevem a propriedade `translate`, então listar
+  // `transform` deixava o hover sem transição alguma.
+  "inline-flex items-center justify-center gap-2 rounded-full text-center font-semibold transition-[background-color,border-color,color,box-shadow,translate] duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60";
 
 const tamanhos: Record<Tamanho, string> = {
   md: "min-h-11 px-5 py-2 text-sm",

@@ -27,7 +27,12 @@ export default function Faq() {
         <SectionHeading
           tom="claro"
           etiqueta="Perguntas frequentes"
-          titulo="Dúvidas que aparecem antes de começar"
+          titulo={
+            <>
+              <span className="texto-gradiente">Dúvidas</span> que aparecem antes
+              de começar
+            </>
+          }
           descricao="Se a sua pergunta não estiver aqui, é só chamar no WhatsApp — respondemos sem compromisso."
           className="lg:sticky lg:top-28"
         />

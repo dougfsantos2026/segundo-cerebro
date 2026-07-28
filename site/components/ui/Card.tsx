@@ -8,6 +8,11 @@ type Props = {
   destaque?: boolean;
   /** Aplica realce sutil ao passar o mouse. */
   interativo?: boolean;
+  /**
+   * Corta o canto superior direito em diagonal. O recorte come a borda junto,
+   * então o card passa a se apoiar só no preenchimento.
+   */
+  chanfro?: boolean;
   className?: string;
 };
 
@@ -16,15 +21,23 @@ export default function Card({
   tom = "escuro",
   destaque = false,
   interativo = false,
+  chanfro = false,
   className,
 }: Props) {
   return (
     <div
       className={cn(
-        "relative rounded-2xl border transition-[border-color,box-shadow,transform] duration-300",
+        // `translate`, não `transform`: no Tailwind v4 é essa a propriedade que
+        // as utilidades de deslocamento escrevem.
+        "relative transition-[border-color,box-shadow,translate] duration-300",
+        chanfro ? "canto-chanfrado rounded-lg" : "rounded-2xl border",
         tom === "escuro"
-          ? "border-white/10 bg-white/[0.03] backdrop-blur-sm"
-          : "border-grafite-200/80 bg-white shadow-[var(--shadow-suave)]",
+          ? chanfro
+            ? "bg-white/[0.06]"
+            : "border-white/10 bg-white/[0.03] backdrop-blur-sm"
+          : chanfro
+            ? "bg-grafite-50"
+            : "border-grafite-200/80 bg-white shadow-[var(--shadow-suave)]",
         destaque &&
           (tom === "escuro"
             ? "border-marca-500/50 bg-marca-500/[0.07]"

@@ -9,7 +9,12 @@ export default function Comparativo() {
     <Section fundo="escuro">
       <SectionHeading
         etiqueta="Comparativo"
-        titulo="A diferença entre um site improvisado e um site profissional"
+        titulo={
+          <>
+            A diferença entre um site improvisado e um{" "}
+            <span className="texto-gradiente-claro">site profissional</span>
+          </>
+        }
         descricao="Os dois ficam no ar. Só um deles trabalha a favor do seu negócio todos os dias."
       />
 

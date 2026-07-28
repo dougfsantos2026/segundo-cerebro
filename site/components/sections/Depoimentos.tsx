@@ -26,7 +26,11 @@ export default function Depoimentos() {
       <SectionHeading
         alinhamento="centro"
         etiqueta="Depoimentos"
-        titulo="O que os clientes dizem"
+        titulo={
+          <>
+            O que os <span className="texto-gradiente-claro">clientes dizem</span>
+          </>
+        }
         descricao="Esta seção está reservada para depoimentos reais, publicados apenas com autorização de cada cliente."
       />
 

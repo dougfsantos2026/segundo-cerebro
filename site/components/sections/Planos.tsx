@@ -15,7 +15,12 @@ export default function Planos() {
         tom="claro"
         alinhamento="centro"
         etiqueta="Formatos de projeto"
-        titulo="Escolha o ponto de partida do seu site"
+        titulo={
+          <>
+            Escolha o <span className="texto-gradiente">ponto de partida</span> do
+            seu site
+          </>
+        }
         descricao="Cada projeto é orçado conforme o escopo, por isso não trabalhamos com tabela fixa de preços. Conte o que precisa e receba uma proposta com valor fechado."
       />
 

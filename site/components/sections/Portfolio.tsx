@@ -10,7 +10,12 @@ export default function Portfolio() {
       <SectionHeading
         tom="claro"
         etiqueta="Projetos"
-        titulo="Exemplos navegáveis do que entregamos"
+        titulo={
+          <>
+            <span className="texto-gradiente">Exemplos navegáveis</span> do que
+            entregamos
+          </>
+        }
         descricao="Projetos de demonstração criados pelo estúdio, com nomes fictícios, para você ver na prática a estrutura e o acabamento de cada tipo de site."
       />
 

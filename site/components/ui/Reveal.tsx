@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useMovimentoReduzido } from "@/lib/use-movimento-reduzido";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -34,7 +35,7 @@ export default function Reveal({
   origem = "baixo",
   as = "div",
 }: Props) {
-  const preferSemMovimento = useReducedMotion();
+  const semMovimento = useMovimentoReduzido();
   const [temEspacoLateral, setTemEspacoLateral] = useState(false);
 
   useEffect(() => {
@@ -45,20 +46,13 @@ export default function Reveal({
     return () => consulta.removeEventListener("change", atualizar);
   }, []);
 
-  if (preferSemMovimento) {
-    const Estatico = as;
-    return (
-      <Estatico data-revelar className={cn(className)}>
-        {children}
-      </Estatico>
-    );
-  }
-
   const Componente = as === "li" ? motion.li : motion.div;
   const { x, y } =
     origem === "baixo" || !temEspacoLateral
       ? deslocamento.baixo
       : deslocamento[origem];
+
+  const visivel = { opacity: 1, x: 0, y: 0 };
 
   return (
     <Componente
@@ -67,9 +61,17 @@ export default function Reveal({
       data-revelar
       className={cn(className)}
       initial={{ opacity: 0, x, y }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      // Sem movimento o elemento salta direto para o estado final, em vez de
+      // esperar a viewport. Trocar as props é o que mantém a marcação igual à do
+      // servidor — remontar um elemento diferente aqui quebraria a hidratação.
+      animate={semMovimento ? visivel : undefined}
+      whileInView={semMovimento ? undefined : visivel}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={
+        semMovimento
+          ? { duration: 0 }
+          : { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }
+      }
     >
       {children}
     </Componente>

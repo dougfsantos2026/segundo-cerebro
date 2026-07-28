@@ -119,7 +119,11 @@ export default function Contato() {
         <div>
           <SectionHeading
             etiqueta="Contato"
-            titulo="Peça seu orçamento"
+            titulo={
+              <>
+                Peça seu <span className="texto-gradiente-claro">orçamento</span>
+              </>
+            }
             descricao="Quanto mais detalhes você contar, mais precisa fica a proposta. Costumamos responder no mesmo dia útil."
           />
 

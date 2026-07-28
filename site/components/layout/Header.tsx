@@ -101,16 +101,17 @@ export default function Header() {
                 href={item.href}
                 aria-current={ativo ? "true" : undefined}
                 className={cn(
-                  "relative rounded-md py-2 text-[13px] font-medium transition-colors xl:text-sm",
+                  "group relative rounded-md py-2 text-[13px] font-medium transition-colors xl:text-sm",
                   ativo ? "text-white" : "text-grafite-300 hover:text-white",
                 )}
               >
                 {item.rotulo}
+                {/* O mesmo traço marca a seção atual e responde ao mouse. */}
                 <span
                   aria-hidden="true"
                   className={cn(
                     "absolute inset-x-0 -bottom-0.5 h-px origin-left bg-ciano-400 transition-transform duration-300",
-                    ativo ? "scale-x-100" : "scale-x-0",
+                    ativo ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                   )}
                 />
               </a>

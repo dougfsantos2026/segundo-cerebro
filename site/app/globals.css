@@ -32,15 +32,27 @@
   --color-ciano-300: #6ee7f7;
   --color-ciano-400: #35d6ee;
   --color-ciano-500: #16bdd8;
+  /* Ciano fechado o bastante para texto sobre branco: o ciano-500 fica em
+     2,3:1 de contraste e não passa nem como texto grande. */
+  --color-ciano-700: #0e7f95;
 
-  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Terceira parada dos gradientes: dá profundidade ao ciano→azul sem puxar
+     a paleta para outro lugar. */
+  --color-indigo-400: #8a72ff;
+  --color-indigo-500: #6a4bf0;
+  --color-indigo-600: #5436cf;
+
+  --font-display: var(--font-display-base), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-base), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1rem;
 
   --shadow-suave: 0 1px 2px rgba(11, 15, 22, 0.04), 0 8px 24px rgba(11, 15, 22, 0.06);
   --shadow-media: 0 2px 4px rgba(11, 15, 22, 0.05), 0 18px 40px rgba(11, 15, 22, 0.1);
   --shadow-alta: 0 30px 70px rgba(6, 8, 12, 0.45);
+
+  /* Curva única para entradas e hovers, para o site inteiro se mover igual. */
+  --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
@@ -78,6 +90,12 @@
     text-wrap: balance;
   }
 
+  /* Manchetes muito grandes pedem entrelinha menor que 1 para não abrir
+     buracos entre as linhas. */
+  h1 {
+    line-height: 0.98;
+  }
+
   p {
     text-wrap: pretty;
   }
@@ -102,16 +120,57 @@
 }
 
 @layer utilities {
-  /* Texto com gradiente da marca, usado em palavras-chave de títulos. */
+  /* Texto com gradiente da marca, usado em palavras-chave de títulos.
+     Sobre fundo claro o ciano puro perderia contraste, por isso a versão
+     clara começa mais fechada. */
   .texto-gradiente {
     background-image: linear-gradient(
-      100deg,
-      var(--color-marca-300),
-      var(--color-ciano-400)
+      160deg,
+      var(--color-ciano-700) 10%,
+      var(--color-marca-600) 60%,
+      var(--color-indigo-600) 100%
     );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+  }
+
+  .texto-gradiente-claro {
+    background-image: linear-gradient(
+      160deg,
+      var(--color-ciano-400) 10%,
+      var(--color-marca-400) 58%,
+      var(--color-indigo-400) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Variante radial para a manchete principal: o branco no canto superior
+     esquerdo faz a frase abrir clara e fechar saturada. */
+  .texto-gradiente-hero {
+    background-image: radial-gradient(
+      168% 122% at 0% 0%,
+      #ffffff 0%,
+      var(--color-ciano-300) 14%,
+      var(--color-marca-400) 52%,
+      var(--color-indigo-400) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Canto superior direito cortado em diagonal, usado nos cartões de número. */
+  .canto-chanfrado {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 2rem) 0,
+      100% 2rem,
+      100% 100%,
+      0 100%
+    );
   }
 
   /* Malha sutil de pontos para fundos escuros. */
@@ -121,6 +180,39 @@
       transparent 1px
     );
     background-size: 28px 28px;
+  }
+
+  /* Grade fina, para dar textura a painéis escuros grandes. */
+  .fundo-grade {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Borda com gradiente sem sobrepor o fundo do cartão. */
+  .borda-gradiente {
+    position: relative;
+  }
+
+  .borda-gradiente::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      rgba(110, 231, 247, 0.5),
+      rgba(76, 125, 255, 0.25) 45%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   /* Linha divisória luminosa entre seções escuras. */
@@ -143,6 +235,127 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+}
+
+/*
+ * Movimentos em loop.
+ *
+ * Todos animam só `transform` e `opacity`, que o navegador resolve na GPU sem
+ * recalcular layout. Nenhum deles altera o tamanho do elemento, então não há
+ * deslocamento de conteúdo enquanto rodam.
+ */
+
+/* Manchas de cor que passeiam devagar atrás da composição do topo. */
+@keyframes aurora-deriva {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6%, -4%, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-5%, 5%, 0) scale(0.94);
+  }
+}
+
+/* Sobe e desce discreto, para selos e cartões soltos. */
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* Faixa que corre para sempre; o conteúdo é duplicado no componente. */
+@keyframes correr-faixa {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Coluna de palavras que sobe em perspectiva. */
+@keyframes subir-perspectiva {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* Reflexo que atravessa a tela do mockup. */
+@keyframes varredura {
+  0% {
+    transform: translate3d(-120%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  45%,
+  100% {
+    transform: translate3d(320%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Anel que se expande e some, marcando um ponto vivo. */
+@keyframes pulsar-anel {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.65;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Giro muito lento de um gradiente cônico. */
+@keyframes girar-lento {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Barra de progresso que enche e reinicia, nos indicadores do mockup. */
+@keyframes encher-barra {
+  0% {
+    transform: scaleX(0);
+  }
+  60%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .anima-aurora {
+    animation: aurora-deriva 22s ease-in-out infinite;
+  }
+
+  .anima-flutuar {
+    animation: flutuar 6s ease-in-out infinite;
+  }
+
+  .anima-varredura {
+    animation: varredura 7s var(--ease-saida) infinite;
+  }
+
+  .anima-girar-lento {
+    animation: girar-lento 40s linear infinite;
+  }
+
+  .anima-pulsar-anel {
+    animation: pulsar-anel 2.6s ease-out infinite;
   }
 }
 

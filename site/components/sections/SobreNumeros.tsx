@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Code2, Handshake, Ruler } from "lucide-react";
 import { indicadores } from "@/data/numeros";
 import Card from "@/components/ui/Card";
@@ -33,7 +34,14 @@ export default function SobreNumeros() {
         <div>
           <SectionHeading
             etiqueta="Sobre o estúdio"
-            titulo="Não vendemos páginas bonitas. Entregamos ferramentas de trabalho."
+            titulo={
+              <>
+                Não vendemos páginas bonitas.{" "}
+                <span className="texto-gradiente-claro">
+                  Entregamos ferramentas de trabalho.
+                </span>
+              </>
+            }
             descricao="Um site precisa ser bonito, sim — mas antes disso precisa abrir rápido, funcionar no celular de qualquer cliente e deixar claro como falar com você. É nessa ordem que trabalhamos."
           />
 
@@ -67,9 +75,28 @@ export default function SobreNumeros() {
           Os números reais devem ser preenchidos em `data/numeros.ts`.
         */}
         <div className="grid gap-4 sm:grid-cols-2 lg:content-center">
+          {/* Foto de bastidor antes dos números: dá rosto ao “você fala com
+              quem desenvolve” dito logo acima. */}
+          <Reveal className="sm:col-span-2">
+            <div className="relative aspect-16/9 overflow-hidden rounded-2xl ring-1 ring-white/10">
+              <Image
+                src="/images/equipe-trabalho.webp"
+                alt="Mesa de trabalho durante o desenvolvimento de um site, com editor de código e tablet de desenho"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                loading="lazy"
+                className="object-cover"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-[linear-gradient(160deg,rgba(11,15,22,0.15),rgba(11,15,22,0.75))]"
+              />
+            </div>
+          </Reveal>
+
           {indicadores.map((indicador, indice) => (
             <Reveal key={indicador.rotulo} delay={indice * 0.06}>
-              <Card className="h-full p-6">
+              <Card chanfro className="h-full p-6 pr-10">
                 <p className="font-display text-4xl font-bold text-white sm:text-5xl">
                   {indicador.valor}
                 </p>

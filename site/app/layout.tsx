@@ -1,20 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Funnel_Display, Funnel_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { contato, redesSociais, siteConfig, siteUrl } from "@/lib/site-config";
 import "./globals.css";
 
-const sora = Sora({
+/* Funnel Display nos títulos e Funnel Sans no texto corrido: a mesma
+   superfamília, com o desenho estreito e geométrico que sustenta manchetes
+   grandes sem pesar. */
+const funnelDisplay = Funnel_Display({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-sora",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display-base",
   display: "swap",
 });
 
-const inter = Inter({
+const funnelSans = Funnel_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
+  variable: "--font-sans-base",
   display: "swap",
 });
 
@@ -100,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.idioma}
-      className={`${sora.variable} ${inter.variable}`}
+      className={`${funnelDisplay.variable} ${funnelSans.variable}`}
     >
       <head>
         {/* Sem JavaScript as animações de entrada nunca disparam; sem isto o
