@@ -70,17 +70,18 @@ export default function Hero() {
           </div>
 
           {/*
-            Duas camadas: a marca recortada emoldura o mockup por trás e sangra
-            para fora da coluna. O parallax move só ela, o que abre uma
-            diferença de profundidade entre o fundo e o mockup à frente.
-          */}
-          {/*
             A marca ocupa o alto da coluna e o mockup entra por baixo, cobrindo
             só a perna esquerda do recorte. É esse desencontro que mantém a
             letra legível — quando o mockup subia, escondia justo a junção dos
-            traços e o “k” virava um losango sem sentido.
+            traços e o “k” virava um losango sem sentido. O parallax move apenas
+            a marca, o que abre profundidade entre ela e o mockup à frente.
+
+            No celular não há coluna ao lado: o recuo do topo abre a faixa em que
+            a letra cabe inteira, sangrando pela direita. Sem esse espaço o
+            mockup cortava a marca na altura do ombro e sobrava um retângulo azul
+            sem forma reconhecível.
           */}
-          <div className="relative md:pt-36 lg:pt-44">
+          <div className="relative pt-24 md:pt-36 lg:pt-44">
             <Parallax
               distancia={50}
               className="pointer-events-none absolute -top-32 -right-24 hidden h-[26rem] md:block lg:-top-40 lg:-right-32 lg:h-[31rem]"
@@ -88,7 +89,7 @@ export default function Hero() {
               <MarcaAurora className="aspect-560/600 h-full" />
             </Parallax>
 
-            <MarcaAurora className="pointer-events-none absolute -top-14 right-2 aspect-560/600 h-48 opacity-60 md:hidden" />
+            <MarcaAurora className="pointer-events-none absolute -top-4 -right-10 aspect-560/600 h-52 opacity-80 md:hidden" />
 
             <Reveal
               delay={0.15}
