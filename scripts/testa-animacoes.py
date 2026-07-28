@@ -182,8 +182,13 @@ class Navegador:
         subprocess.run(["pkill", "-f", self.perfil], check=False)
 
 
+# A marca aparece duas vezes no topo, uma versão para cada faixa de largura, e
+# a que não é da vez fica em `display:none`. Imagem sob demanda dentro de um
+# elemento oculto nunca começa a carregar — é o comportamento desejado, não uma
+# imagem quebrada. Por isso o que não ocupa espaço na página fica de fora.
 IMAGENS_QUEBRADAS = """
 [...document.images]
+  .filter((im) => im.getClientRects().length > 0)
   .filter((im) => !im.complete || im.naturalWidth === 0)
   .map((im) => im.currentSrc || im.src)
 """
