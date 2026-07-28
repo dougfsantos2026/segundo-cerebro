@@ -337,6 +337,153 @@
   }
 }
 
+/*
+ * Ciclo da cena dentro da marca.
+ *
+ * Os tempos vêm do laço de 8s observado na referência: a figura gira de costas
+ * para o perfil em cerca de 1,5s, fica assim por 5s e volta nos 1,5s finais.
+ * As porcentagens abaixo são essa contagem convertida — 19% são os 1,5s, 81%
+ * são os 6,5s. Como todas as camadas usam a mesma duração, elas voltam juntas
+ * ao ponto de partida e o laço não tem emenda.
+ */
+
+/*
+ * O giro é feito com duas fotos da mesma pessoa, uma de costas e uma de perfil,
+ * trocadas na mesma caixa. Só apagar uma e acender a outra produz uma dupla
+ * exposição: por um instante aparecem dois corpos.
+ *
+ * O que desfaz isso é imitar o que a rotação faz de verdade. Ao virar noventa
+ * graus o corpo passa de ombro a ombro para a espessura do tronco, então cada
+ * pose estreita até a metade no ponto da troca e a passagem fica de perfil, sem
+ * largura para as duas se sobreporem. O desfoque no mesmo ponto cobre o resto,
+ * do jeito que o movimento rápido borra na câmera. A troca dura 0,64s dos 8s do
+ * laço — curta o bastante para o olho ler giro, não dissolução.
+ */
+@keyframes girar-para-perfil {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+  4% {
+    opacity: 0.6;
+    transform: scaleX(0.76);
+    filter: blur(1.2px);
+  }
+  8%,
+  86% {
+    opacity: 0;
+    transform: scaleX(0.5);
+    filter: blur(0);
+  }
+  93% {
+    opacity: 0.6;
+    transform: scaleX(0.76);
+    filter: blur(1.2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes girar-para-costas {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.5);
+    filter: blur(0);
+  }
+  4% {
+    opacity: 0.6;
+    transform: scaleX(0.76);
+    filter: blur(1.2px);
+  }
+  8%,
+  86% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+  93% {
+    opacity: 0.6;
+    transform: scaleX(0.76);
+    filter: blur(1.2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0.5);
+    filter: blur(0);
+  }
+}
+
+/* Respiração: o corpo inteiro sobe e desce alguns pixels. */
+@keyframes respirar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -0.9%, 0);
+  }
+}
+
+/*
+ * A aurora acende e apaga, o movimento mais visível do laço da referência.
+ *
+ * O extremo do laço não desce até o apagado: com movimento reduzido a regra
+ * global congela a animação no quadro final, e uma cena parada no vale seria
+ * mais escura do que o pretendido. Começar e terminar em meia luz deixa os dois
+ * estados apresentáveis.
+ */
+@keyframes acender-aurora {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  45% {
+    opacity: 0.85;
+  }
+}
+
+/* Cintilação do céu: duas camadas com tempos diferentes evitam pisca-pisca. */
+@keyframes cintilar {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+/* Esferas subindo e sumindo, como as que atravessam o vídeo da referência. */
+@keyframes subir-esfera {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 40%, 0) scale(0.7);
+  }
+  15%,
+  70% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(6%, -160%, 0) scale(1.15);
+  }
+}
+
+/* Aproximação lenta da câmera, sem nunca sair do recorte. */
+@keyframes aproximar-cena {
+  0%,
+  100% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate3d(-1%, -1.5%, 0);
+  }
+}
+
 @layer utilities {
   .anima-aurora {
     animation: aurora-deriva 22s ease-in-out infinite;
@@ -356,6 +503,67 @@
 
   .anima-pulsar-anel {
     animation: pulsar-anel 2.6s ease-out infinite;
+  }
+
+  /*
+   * Camadas da cena dentro da marca.
+   *
+   * As cinco que compõem o laço de 8s dividem a mesma duração de propósito: é
+   * o que faz o giro da figura, o brilho da aurora e a aproximação da câmera
+   * recomeçarem no mesmo quadro, sem uma arrastar a outra.
+   */
+  /* Linear de propósito: a aceleração do giro já está na distribuição das
+     paradas, e um easing por trecho faria o corpo travar em cada uma. */
+  .anima-girar-perfil {
+    animation: girar-para-perfil 8s linear infinite;
+  }
+
+  .anima-girar-costas {
+    animation: girar-para-costas 8s linear infinite;
+  }
+
+  .anima-acender {
+    animation: acender-aurora 8s ease-in-out infinite;
+  }
+
+  .anima-respirar {
+    animation: respirar 4s ease-in-out infinite;
+  }
+
+  .anima-cintilar {
+    animation: cintilar 7s ease-in-out infinite;
+  }
+
+  .anima-esfera {
+    animation: subir-esfera 16s linear infinite;
+  }
+
+  .anima-aproximar {
+    animation: aproximar-cena 24s ease-in-out infinite;
+  }
+
+  /* Pontos de luz espalhados sem repetição óbvia: cada parada é uma estrela,
+     e o tamanho do ladrilho é grande o bastante para o padrão não se anunciar. */
+  .estrelas {
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(1px 1px at 34% 7%, rgba(255, 255, 255, 0.75), transparent),
+      radial-gradient(1.5px 1.5px at 58% 22%, rgba(210, 240, 255, 0.85), transparent),
+      radial-gradient(1px 1px at 78% 11%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 91% 30%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 22% 41%, rgba(220, 235, 255, 0.6), transparent);
+    background-size: 100% 100%;
+  }
+
+  .estrelas-densas {
+    background-image:
+      radial-gradient(1px 1px at 7% 9%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 46% 14%, rgba(255, 255, 255, 0.65), transparent),
+      radial-gradient(1.5px 1.5px at 67% 5%, rgba(235, 245, 255, 0.9), transparent),
+      radial-gradient(1px 1px at 84% 20%, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 30% 28%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 52% 36%, rgba(215, 240, 255, 0.75), transparent);
+    background-size: 100% 100%;
   }
 }
 

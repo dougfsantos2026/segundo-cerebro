@@ -90,10 +90,13 @@ export default function Hero() {
               distancia={50}
               className="pointer-events-none absolute -top-32 -right-24 hidden h-[26rem] md:block lg:-top-40 lg:-right-32 lg:h-[31rem]"
             >
-              <MarcaAurora className="aspect-560/600 h-full" />
+              <MarcaAurora prioridade className="aspect-560/600 h-full" />
             </Parallax>
 
-            <MarcaAurora className="pointer-events-none absolute -top-4 -right-10 aspect-560/600 h-52 opacity-80 md:hidden" />
+            {/* No celular a letra é o único lugar em que a cena aparece, então
+                sangra pouco pela direita e sobe para não brigar com o botão
+                flutuante do canto. */}
+            <MarcaAurora className="pointer-events-none absolute -top-10 -right-5 aspect-560/600 h-60 md:hidden" />
 
             <Reveal
               delay={0.15}

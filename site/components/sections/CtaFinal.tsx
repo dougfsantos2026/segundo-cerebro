@@ -14,7 +14,12 @@ export default function CtaFinal() {
 
         {/* A marca reaparece aqui em escala grande e bem apagada: fecha a
             página com o mesmo elemento que a abre, sem competir com o texto. */}
-        <MarcaAurora className="absolute -bottom-1/4 left-1/2 aspect-560/600 h-[150%] -translate-x-1/2 opacity-[0.07]" />
+        {/* Sem figura: nesta opacidade ela não seria vista, e a cena entra só
+            como textura de fundo. */}
+        <MarcaAurora
+          semFigura
+          className="absolute -bottom-1/4 left-1/2 aspect-560/600 h-[150%] -translate-x-1/2 opacity-[0.07]"
+        />
       </div>
 
       <Container className="relative">
