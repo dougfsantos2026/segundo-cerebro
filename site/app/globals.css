@@ -354,10 +354,10 @@
  *
  * O que desfaz isso é imitar o que a rotação faz de verdade. Ao virar noventa
  * graus o corpo passa de ombro a ombro para a espessura do tronco, então cada
- * pose estreita até a metade no ponto da troca e a passagem fica de perfil, sem
- * largura para as duas se sobreporem. O desfoque no mesmo ponto cobre o resto,
- * do jeito que o movimento rápido borra na câmera. A troca dura 0,64s dos 8s do
- * laço — curta o bastante para o olho ler giro, não dissolução.
+ * pose estreita a menos da metade no ponto da troca e a passagem fica de canto,
+ * sem largura para as duas se sobreporem. O desfoque no mesmo ponto cobre o
+ * resto, do jeito que o movimento rápido borra na câmera. A troca dura 0,48s
+ * dos 8s do laço — curta o bastante para o olho ler giro, não dissolução.
  */
 @keyframes girar-para-perfil {
   0% {
@@ -365,21 +365,21 @@
     transform: scaleX(1);
     filter: blur(0);
   }
-  4% {
-    opacity: 0.6;
-    transform: scaleX(0.76);
-    filter: blur(1.2px);
-  }
-  8%,
-  86% {
-    opacity: 0;
+  3% {
+    opacity: 0.55;
     transform: scaleX(0.5);
+    filter: blur(2.2px);
+  }
+  6%,
+  88% {
+    opacity: 0;
+    transform: scaleX(0.4);
     filter: blur(0);
   }
-  93% {
-    opacity: 0.6;
-    transform: scaleX(0.76);
-    filter: blur(1.2px);
+  95% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
   }
   100% {
     opacity: 1;
@@ -391,28 +391,28 @@
 @keyframes girar-para-costas {
   0% {
     opacity: 0;
-    transform: scaleX(0.5);
+    transform: scaleX(0.4);
     filter: blur(0);
   }
-  4% {
-    opacity: 0.6;
-    transform: scaleX(0.76);
-    filter: blur(1.2px);
+  3% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
   }
-  8%,
-  86% {
+  6%,
+  88% {
     opacity: 1;
     transform: scaleX(1);
     filter: blur(0);
   }
-  93% {
-    opacity: 0.6;
-    transform: scaleX(0.76);
-    filter: blur(1.2px);
+  95% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
   }
   100% {
     opacity: 0;
-    transform: scaleX(0.5);
+    transform: scaleX(0.4);
     filter: blur(0);
   }
 }
