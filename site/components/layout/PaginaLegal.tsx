@@ -33,7 +33,9 @@ export default function PaginaLegal({ titulo, atualizadoEm, children }: Props) {
                 "[&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white sm:[&_h2]:text-2xl",
                 "[&_h2]:mb-3",
                 "[&_p]:text-sm [&_p]:leading-relaxed sm:[&_p]:text-base",
-                "[&_p+p]:mt-3",
+                // Vale também para o parágrafo que vem depois de uma lista,
+                // senão ele encosta no último item.
+                "[&_:is(p,ul)+p]:mt-3",
                 "[&_ul]:mt-3 [&_ul]:space-y-2 [&_ul]:text-sm sm:[&_ul]:text-base",
                 "[&_li]:relative [&_li]:pl-5",
                 "[&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-2.5",

@@ -32,7 +32,11 @@ export default function Hero() {
             </Reveal>
 
             <Reveal delay={0.06}>
-              <h1 className="texto-gradiente-hero mt-6 text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem]">
+              {/* Peso normal só aqui: acima de 60px a Funnel Display mostra o
+                  desenho estreito das hastes, que o negrito engorda e achata.
+                  Nos títulos menores o negrito continua, senão a manchete
+                  ficaria mais leve que os subtítulos da página. */}
+              <h1 className="texto-gradiente-hero mt-6 text-4xl font-normal sm:text-5xl lg:text-6xl xl:text-[4.5rem]">
                 Sites profissionais que transformam visitantes em clientes.
               </h1>
             </Reveal>
