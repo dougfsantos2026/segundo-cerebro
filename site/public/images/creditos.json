@@ -1,4 +1,10 @@
 {
+  "cena-aurora.webp": {
+    "autor": "kdiff",
+    "descricao": "aurora sobre montanhas, cena de fundo do recorte da marca",
+    "fonte": "Ilustração original, gerada para este projeto",
+    "licenca": "Uso exclusivo do projeto"
+  },
   "equipe-trabalho.webp": {
     "autor": "Mahmudul Hasan",
     "descricao": "Man working at a desk with computer and tablet",
@@ -7,6 +13,18 @@
     "licenca": "https://unsplash.com/license",
     "pagina": "https://unsplash.com/photos/man-working-at-a-desk-with-computer-and-tablet-Mo08jadTWYc",
     "perfil": "https://unsplash.com/@mhmanik02"
+  },
+  "figura-costas.webp": {
+    "autor": "kdiff",
+    "descricao": "pessoa de costas olhando o celular, primeira pose do giro",
+    "fonte": "Ilustração original, gerada para este projeto",
+    "licenca": "Uso exclusivo do projeto"
+  },
+  "figura-perfil.webp": {
+    "autor": "kdiff",
+    "descricao": "a mesma pessoa de perfil com o celular erguido, segunda pose do giro",
+    "fonte": "Ilustração original, gerada para este projeto",
+    "licenca": "Uso exclusivo do projeto"
   },
   "segmento-advocacia.webp": {
     "autor": "Helena Lopes",
@@ -61,14 +79,5 @@
     "licenca": "https://unsplash.com/license",
     "pagina": "https://unsplash.com/photos/grayscale-photo-of-woman-using-laptop-near-three-salon-chairs-VjRpkGtS55w",
     "perfil": "https://unsplash.com/@awcreativeut"
-  },
-  "textura-aurora.webp": {
-    "autor": "Richard Horvath",
-    "descricao": "deep blue and purple flowing shapes",
-    "fonte": "Unsplash",
-    "id": "photo-1620121692029-d088224ddc74",
-    "licenca": "https://unsplash.com/license",
-    "pagina": "https://unsplash.com/photos/deep-blue-and-purple-flowing-shapes-_nWaeTF6qo0",
-    "perfil": "https://unsplash.com/@ricvath"
   }
 }
