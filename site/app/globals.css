@@ -1,0 +1,599 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens do kdiff.
+ * Paleta original: base grafite escura, seções claras em cinza quase branco,
+ * azul elétrico como cor de destaque e ciano como apoio em gradientes.
+ */
+@theme {
+  --color-grafite-950: #06080c;
+  --color-grafite-900: #0b0f16;
+  --color-grafite-850: #0f141d;
+  --color-grafite-800: #131926;
+  --color-grafite-700: #1c2434;
+  --color-grafite-600: #2a3446;
+  --color-grafite-500: #3d4a60;
+  --color-grafite-400: #64748b;
+  /* Cinza mais claro para texto secundário sobre fundo escuro: garante ao
+     menos 5.5:1 de contraste, o que o grafite-400 não alcança. */
+  --color-grafite-350: #7f8da3;
+  --color-grafite-300: #94a3b8;
+  --color-grafite-200: #cbd5e1;
+  --color-grafite-100: #e6ebf2;
+  --color-grafite-50: #f5f7fa;
+
+  --color-marca-200: #c2d5ff;
+  --color-marca-300: #8fb4ff;
+  --color-marca-400: #6e9bff;
+  --color-marca-500: #4c7dff;
+  --color-marca-600: #3a63e6;
+  --color-marca-700: #2c4cbf;
+
+  --color-ciano-300: #6ee7f7;
+  --color-ciano-400: #35d6ee;
+  --color-ciano-500: #16bdd8;
+  /* Ciano fechado o bastante para texto sobre branco: o ciano-500 fica em
+     2,3:1 de contraste e não passa nem como texto grande. */
+  --color-ciano-700: #0e7f95;
+
+  /* Terceira parada dos gradientes: dá profundidade ao ciano→azul sem puxar
+     a paleta para outro lugar. */
+  --color-indigo-400: #8a72ff;
+  --color-indigo-500: #6a4bf0;
+  --color-indigo-600: #5436cf;
+
+  --font-display: var(--font-display-base), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-base), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+
+  --shadow-suave: 0 1px 2px rgba(11, 15, 22, 0.04), 0 8px 24px rgba(11, 15, 22, 0.06);
+  --shadow-media: 0 2px 4px rgba(11, 15, 22, 0.05), 0 18px 40px rgba(11, 15, 22, 0.1);
+  --shadow-alta: 0 30px 70px rgba(6, 8, 12, 0.45);
+
+  /* Curva única para entradas e hovers, para o site inteiro se mover igual. */
+  --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-grafite-200);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o cabeçalho fixo na navegação por âncoras. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-grafite-900);
+    color: var(--color-grafite-900);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Nenhuma tela deve rolar na horizontal. */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  /* Manchetes muito grandes pedem entrelinha menor que 1 para não abrir
+     buracos entre as linhas. */
+  h1 {
+    line-height: 0.95;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Foco sempre visível, inclusive sobre fundos escuros. */
+  :focus-visible {
+    outline: 2px solid var(--color-ciano-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Evita que âncoras fiquem escondidas atrás do cabeçalho. */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer utilities {
+  /* Texto com gradiente da marca, usado em palavras-chave de títulos.
+     Sobre fundo claro o ciano puro perderia contraste, por isso a versão
+     clara começa mais fechada. */
+  .texto-gradiente {
+    background-image: linear-gradient(
+      160deg,
+      var(--color-ciano-700) 10%,
+      var(--color-marca-600) 60%,
+      var(--color-indigo-600) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .texto-gradiente-claro {
+    background-image: linear-gradient(
+      160deg,
+      var(--color-ciano-400) 10%,
+      var(--color-marca-400) 58%,
+      var(--color-indigo-400) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Variante radial para a manchete principal: o branco no canto superior
+     esquerdo faz a frase abrir clara e fechar saturada. */
+  .texto-gradiente-hero {
+    background-image: radial-gradient(
+      168% 122% at 0% 0%,
+      #ffffff 0%,
+      var(--color-ciano-300) 14%,
+      var(--color-marca-400) 52%,
+      var(--color-indigo-400) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Canto superior direito cortado em diagonal, usado nos cartões de número. */
+  .canto-chanfrado {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 2rem) 0,
+      100% 2rem,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  /* Malha sutil de pontos para fundos escuros. */
+  .fundo-pontilhado {
+    background-image: radial-gradient(
+      rgba(148, 163, 184, 0.16) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+
+  /* Grade fina, para dar textura a painéis escuros grandes. */
+  .fundo-grade {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Borda com gradiente sem sobrepor o fundo do cartão. */
+  .borda-gradiente {
+    position: relative;
+  }
+
+  .borda-gradiente::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      rgba(110, 231, 247, 0.5),
+      rgba(76, 125, 255, 0.25) 45%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Linha divisória luminosa entre seções escuras. */
+  .borda-luz {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(76, 125, 255, 0.5),
+      transparent
+    );
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/*
+ * Movimentos em loop.
+ *
+ * Todos animam só `transform` e `opacity`, que o navegador resolve na GPU sem
+ * recalcular layout. Nenhum deles altera o tamanho do elemento, então não há
+ * deslocamento de conteúdo enquanto rodam.
+ */
+
+/* Manchas de cor que passeiam devagar atrás da composição do topo. */
+@keyframes aurora-deriva {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6%, -4%, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-5%, 5%, 0) scale(0.94);
+  }
+}
+
+/* Sobe e desce discreto, para selos e cartões soltos. */
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* Faixa que corre para sempre; o conteúdo é duplicado no componente. */
+@keyframes correr-faixa {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Coluna de palavras que sobe em perspectiva. */
+@keyframes subir-perspectiva {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* Reflexo que atravessa a tela do mockup. */
+@keyframes varredura {
+  0% {
+    transform: translate3d(-120%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  45%,
+  100% {
+    transform: translate3d(320%, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Anel que se expande e some, marcando um ponto vivo. */
+@keyframes pulsar-anel {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.65;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Giro muito lento de um gradiente cônico. */
+@keyframes girar-lento {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Barra de progresso que enche e reinicia, nos indicadores do mockup. */
+@keyframes encher-barra {
+  0% {
+    transform: scaleX(0);
+  }
+  60%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/*
+ * Ciclo da cena dentro da marca.
+ *
+ * Os tempos vêm do laço de 8s observado na referência: a figura gira de costas
+ * para o perfil no começo, fica assim pela maior parte do ciclo e volta no fim.
+ * O giro e o brilho da aurora dividem esses 8s, então recomeçam no mesmo
+ * quadro. As demais camadas — estrelas, esferas e a aproximação da câmera —
+ * correm em tempos próprios de propósito: períodos que não se dividem entre si
+ * demoram muito a coincidir, e o céu nunca repete o mesmo desenho.
+ */
+
+/*
+ * O giro é feito com duas fotos da mesma pessoa, uma de costas e uma de perfil,
+ * trocadas na mesma caixa. Só apagar uma e acender a outra produz uma dupla
+ * exposição: por um instante aparecem dois corpos.
+ *
+ * O que desfaz isso é imitar o que a rotação faz de verdade. Ao virar noventa
+ * graus o corpo passa de ombro a ombro para a espessura do tronco, então cada
+ * pose estreita a menos da metade no ponto da troca e a passagem fica de canto,
+ * sem largura para as duas se sobreporem. O desfoque no mesmo ponto cobre o
+ * resto, do jeito que o movimento rápido borra na câmera. A troca dura 0,48s
+ * dos 8s do laço — curta o bastante para o olho ler giro, não dissolução.
+ */
+@keyframes girar-para-perfil {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+  3% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
+  }
+  6%,
+  88% {
+    opacity: 0;
+    transform: scaleX(0.4);
+    filter: blur(0);
+  }
+  95% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes girar-para-costas {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.4);
+    filter: blur(0);
+  }
+  3% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
+  }
+  6%,
+  88% {
+    opacity: 1;
+    transform: scaleX(1);
+    filter: blur(0);
+  }
+  95% {
+    opacity: 0.55;
+    transform: scaleX(0.5);
+    filter: blur(2.2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0.4);
+    filter: blur(0);
+  }
+}
+
+/* Respiração: o corpo inteiro sobe e desce alguns pixels. */
+@keyframes respirar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -0.9%, 0);
+  }
+}
+
+/*
+ * A aurora acende e apaga, o movimento mais visível do laço da referência.
+ *
+ * O extremo do laço não desce até o apagado: com movimento reduzido a regra
+ * global congela a animação no quadro final, e uma cena parada no vale seria
+ * mais escura do que o pretendido. Começar e terminar em meia luz deixa os dois
+ * estados apresentáveis.
+ */
+@keyframes acender-aurora {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  45% {
+    opacity: 0.85;
+  }
+}
+
+/* Cintilação do céu: duas camadas com tempos diferentes evitam pisca-pisca. */
+@keyframes cintilar {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+/* Esferas subindo e sumindo, como as que atravessam o vídeo da referência. */
+@keyframes subir-esfera {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 40%, 0) scale(0.7);
+  }
+  15%,
+  70% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(6%, -160%, 0) scale(1.15);
+  }
+}
+
+/* Aproximação lenta da câmera, sem nunca sair do recorte. */
+@keyframes aproximar-cena {
+  0%,
+  100% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate3d(-1%, -1.5%, 0);
+  }
+}
+
+@layer utilities {
+  .anima-aurora {
+    animation: aurora-deriva 22s ease-in-out infinite;
+  }
+
+  .anima-flutuar {
+    animation: flutuar 6s ease-in-out infinite;
+  }
+
+  .anima-varredura {
+    animation: varredura 7s var(--ease-saida) infinite;
+  }
+
+  .anima-girar-lento {
+    animation: girar-lento 40s linear infinite;
+  }
+
+  .anima-pulsar-anel {
+    animation: pulsar-anel 2.6s ease-out infinite;
+  }
+
+  /*
+   * Camadas da cena dentro da marca.
+   *
+   * O giro e o brilho dividem os mesmos 8s, para que a aurora esteja no auge
+   * quando a figura está de perfil. O resto corre solto.
+   */
+  /* Linear de propósito: a aceleração do giro já está na distribuição das
+     paradas, e um easing por trecho faria o corpo travar em cada uma. */
+  .anima-girar-perfil {
+    animation: girar-para-perfil 8s linear infinite;
+  }
+
+  .anima-girar-costas {
+    animation: girar-para-costas 8s linear infinite;
+  }
+
+  .anima-acender {
+    animation: acender-aurora 8s ease-in-out infinite;
+  }
+
+  .anima-respirar {
+    animation: respirar 4s ease-in-out infinite;
+  }
+
+  .anima-cintilar {
+    animation: cintilar 7s ease-in-out infinite;
+  }
+
+  .anima-esfera {
+    animation: subir-esfera 16s linear infinite;
+  }
+
+  .anima-aproximar {
+    animation: aproximar-cena 24s ease-in-out infinite;
+  }
+
+  /* Pontos de luz espalhados sem repetição óbvia: cada parada é uma estrela,
+     e o tamanho do ladrilho é grande o bastante para o padrão não se anunciar. */
+  .estrelas {
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(1px 1px at 34% 7%, rgba(255, 255, 255, 0.75), transparent),
+      radial-gradient(1.5px 1.5px at 58% 22%, rgba(210, 240, 255, 0.85), transparent),
+      radial-gradient(1px 1px at 78% 11%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 91% 30%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 22% 41%, rgba(220, 235, 255, 0.6), transparent);
+    background-size: 100% 100%;
+  }
+
+  .estrelas-densas {
+    background-image:
+      radial-gradient(1px 1px at 7% 9%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 46% 14%, rgba(255, 255, 255, 0.65), transparent),
+      radial-gradient(1.5px 1.5px at 67% 5%, rgba(235, 245, 255, 0.9), transparent),
+      radial-gradient(1px 1px at 84% 20%, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 30% 28%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 52% 36%, rgba(215, 240, 255, 0.75), transparent);
+    background-size: 100% 100%;
+  }
+}
+
+/* Respeita quem prefere menos movimento: sem scroll suave nem animações. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Garante que nada fique preso no estado inicial da animação de entrada,
+     mesmo que o script ainda não tenha assumido o controle do elemento. */
+  [data-revelar] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* A marca usa vídeo em loop; com movimento reduzido fica o pôster parado. */
+  .marca-video {
+    display: none !important;
+  }
+
+  .marca-poster-estatico {
+    display: block !important;
+  }
+}

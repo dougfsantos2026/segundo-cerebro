@@ -1,0 +1,6 @@
+{
+  "$schema": "https://www.cursor.com/schemas/environment.schema.json",
+  "name": "kdiff",
+  "install": "cd site && npm ci",
+  "repositoryDependencies": ["github.com/dougfsantos2026/kdiff"]
+}
