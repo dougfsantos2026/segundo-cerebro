@@ -116,36 +116,61 @@ imagem vem de domínio externo em tempo de execução.
 | Arquivo | Onde aparece |
 | --- | --- |
 | `mascara-marca.svg` | recorte do “k” usado como máscara alfa (gerado por script, não é foto) |
-| `cena-aurora.webp` | ilustração de fundo que preenche o recorte da marca |
-| `figura-costas.webp` | pessoa de costas olhando o celular, primeira pose do giro |
-| `figura-perfil.webp` | a mesma pessoa de perfil com o celular erguido, segunda pose |
+| `marca-cena-poster.webp` | primeiro quadro do vídeo; aparece com movimento reduzido |
+| `cena-aurora.webp` | ilustração de fundo (usada ao gravar o vídeo) |
+| `figura-costas.webp` | primeira pose do giro (só na gravação do vídeo) |
+| `figura-perfil.webp` | segunda pose do giro (só na gravação do vídeo) |
 | `equipe-trabalho.webp` | seção “Sobre o estúdio” |
 | `segmento-*.webp` (6) | prévias dos projetos do portfólio |
+
+Vídeo em `public/videos/`:
+
+| Arquivo | Onde aparece |
+| --- | --- |
+| `marca-cena.mp4` | animação dentro do recorte da marca no topo (laço de 8s) |
 
 As fotos de seção vêm do Unsplash, sob a
 [licença da plataforma](https://unsplash.com/license). A cena da marca e as duas
 poses da figura são ilustrações originais feitas para o projeto. Autoria,
 origem e descrição de cada arquivo ficam em `public/images/creditos.json`.
 
-### A cena dentro da marca
+### A cena dentro da marca (vídeo)
 
-O “k” do topo não é uma imagem só: é uma pilha de camadas recortada pela máscara
-alfa da letra, montada em `components/visual/MarcaAurora.tsx`. De trás para a
-frente vêm a ilustração da aurora, o brilho que acende e apaga, o céu que
-cintila, as esferas que sobem e, sobre a linha do horizonte, a figura.
+O “k” do topo é recortado pela máscara alfa da letra e, dentro dela, roda um
+vídeo em loop: `public/videos/marca-cena.mp4`. O componente é
+`components/visual/MarcaAurora.tsx`. Com `prefers-reduced-motion: reduce` o
+vídeo some e fica o pôster parado (`marca-cena-poster.webp`).
 
-O caminho óbvio seria um vídeo, e é o que a maior parte dos sites faz. Em
-camadas o topo carrega cerca de cem quilobytes em vez de alguns megabytes, a
-cena continua nítida em qualquer resolução, e cada movimento pode parar sozinho
-quando o sistema pede menos animação — coisas que um `.webm` não entrega.
+**Trocar a animação por outro MP4**
 
-O giro da figura merece nota. Ele é feito com duas poses da mesma pessoa
-trocadas na mesma caixa, e uma troca simples mostraria dois corpos por um
-instante. O que resolve é imitar a rotação de verdade: ao virar noventa graus o
-corpo passa da largura dos ombros para a espessura do tronco, então cada pose
-estreita até a metade no ponto da troca e a passagem acontece de perfil, sem
-largura para as duas se sobreporem. Um desfoque curto no mesmo ponto cobre o
-resto.
+1. Coloque o arquivo em `site/public/videos/marca-cena.mp4` (substitua o existente).
+2. Gere um pôster do primeiro quadro, para o celular e para movimento reduzido:
+
+   ```bash
+   ffmpeg -i site/public/videos/marca-cena.mp4 -frames:v 1 \
+     -vf "scale=1120:-2" -quality 82 site/public/images/marca-cena-poster.webp
+   ```
+
+3. Rebuild e teste: `cd site && npm run build && npm start`.
+
+O vídeo precisa ser **sem áudio**, em loop visual (o HTML usa `loop`), e com
+proporção parecida com 560 × 600 — a mesma do recorte da marca. H.264 em
+`yuv420p` abre em todos os navegadores.
+
+**Regenerar o vídeo a partir da cena em CSS**
+
+Se você altera a cena em `components/visual/CenaAurora.tsx` (aurora, figura,
+estrelas), regrave o MP4:
+
+```bash
+cd site && npm run build
+ALLOW_RENDER=1 npm start -- -p 3600
+python3 scripts/gera-video-marca.py
+```
+
+O script abre `/render/marca`, posiciona cada quadro do laço de 8s e monta o
+MP4 com `ffmpeg`. A rota `/render/marca` só existe em desenvolvimento ou com
+`ALLOW_RENDER=1` no servidor de produção.
 
 ### Movimento
 
@@ -160,8 +185,9 @@ coincidir, e o céu nunca repete exatamente o mesmo desenho.
 
 | Animação | Duração | Onde |
 | --- | --- | --- |
-| `girar-para-perfil` / `girar-para-costas` | 8s | as duas poses da figura dentro da marca |
-| `acender-aurora` | 8s | brilho da aurora subindo e descendo |
+| `marca-cena.mp4` | 8s em loop | recorte da marca no topo (vídeo, não CSS) |
+| `girar-para-perfil` / `girar-para-costas` | 8s | só em `/render/marca` ao gravar o vídeo |
+| `acender-aurora` | 8s | idem |
 | `respirar` | 4s | oscilação vertical do corpo inteiro |
 | `cintilar` | 5,5s / 7s | duas camadas de estrelas em ritmos diferentes |
 | `subir-esfera` | 13s a 21s | quatro esferas de luz atravessando a cena |
@@ -231,6 +257,7 @@ Os scripts de apoio ao trabalho visual ficam no mesmo diretório:
 externo; `escolhe-fotos.py`, `fixa-foto.py` e `baixa-fotos.py` buscam, convertem
 e registram fotografia do Unsplash; `gera-mascara-marca.py` reescreve o SVG do
 recorte da marca; `recorta-figura.py` tira as poses da figura do fundo branco e
-alinha uma com a outra.
+alinha uma com a outra; `gera-video-marca.py` grava `public/videos/marca-cena.mp4`
+a partir da cena em `/render/marca`.
 
 Todos precisam do Chrome instalado e do pacote `websocket-client`.

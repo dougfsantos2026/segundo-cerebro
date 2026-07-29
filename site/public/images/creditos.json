@@ -1,4 +1,10 @@
 {
+  "marca-cena-poster.webp": {
+    "autor": "kdiff",
+    "descricao": "primeiro quadro do vídeo da marca",
+    "fonte": "Gerado por scripts/gera-video-marca.py",
+    "licenca": "Uso exclusivo do projeto"
+  },
   "cena-aurora.webp": {
     "autor": "kdiff",
     "descricao": "aurora sobre montanhas, cena de fundo do recorte da marca",

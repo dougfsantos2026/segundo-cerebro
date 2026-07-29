@@ -587,4 +587,13 @@
     opacity: 1 !important;
     transform: none !important;
   }
+
+  /* A marca usa vídeo em loop; com movimento reduzido fica o pôster parado. */
+  .marca-video {
+    display: none !important;
+  }
+
+  .marca-poster-estatico {
+    display: block !important;
+  }
 }
